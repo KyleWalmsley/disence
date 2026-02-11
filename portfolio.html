@@ -1,0 +1,566 @@
+<html lang="en" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLYERA | Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons (Kept for existing UI consistency) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Iconify (For new elements as requested) -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    letterSpacing: {
+                        tighter: '-0.04em',
+                        tight: '-0.02em',
+                        widest: '0.15em',
+                    },
+                    backgroundImage: {
+                        'noise': "url('https://grainy-gradients.vercel.app/noise.svg')",
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { -webkit-font-smoothing: antialiased; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        ::selection { background: rgba(59, 130, 246, 0.3); color: white; }
+        /* Custom Scrollbar for mini-websites if needed */
+        .mini-site::-webkit-scrollbar { width: 4px; }
+        .mini-site::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 4px; }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-black text-neutral-900 dark:text-neutral-100 transition-colors duration-700 font-sans selection:bg-brand-500/30">
+
+    <!-- Full Screen Menu Overlay -->
+    <div id="full-screen-menu" class="fixed inset-0 bg-white dark:bg-neutral-950 z-50 flex flex-col justify-center items-center opacity-0 pointer-events-none transition-all duration-500 backdrop-blur-3xl">
+        <button id="close-menu" class="absolute top-6 right-6 md:right-12 w-10 h-10 rounded-full border border-neutral-200 dark:border-white/20 flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-white/10 text-black dark:text-white transition-all hover:text-blue-600 dark:hover:text-blue-600 hover:border-blue-600">
+            <i data-lucide="x" class="w-5 h-5" stroke-width="1.5"></i>
+        </button>
+        
+        <nav class="flex flex-col gap-6 text-center mb-12">
+            <a href="#" class="menu-link text-3xl md:text-5xl font-light text-neutral-400 hover:text-blue-600 transition-colors duration-300">Home</a>
+            <a href="#" class="menu-link text-3xl md:text-5xl font-light text-neutral-400 hover:text-blue-600 transition-colors duration-300">Modular Build Websites</a>
+            <a href="#" class="menu-link text-3xl md:text-5xl font-light text-neutral-400 hover:text-blue-600 transition-colors duration-300">Custom Build Websites</a>
+            <a href="#portfolio" class="menu-link text-3xl md:text-5xl font-light text-neutral-400 hover:text-blue-600 transition-colors duration-300">Portfolio</a>
+        </nav>
+
+        <a href="#contact" class="uppercase hover:bg-blue-600 hover:text-white transition-all duration-300 text-xs font-bold text-white tracking-widest bg-brand-500 py-4 px-8 rounded-full menu-link">
+            Request Free Website Assessment
+        </a>
+    </div>
+
+    <!-- Right Navigation -->
+    <div class="fixed -translate-y-1/2 hidden lg:flex flex-col text-white mix-blend-difference z-40 top-1/2 right-6 items-end gap-4 pointer-events-none">
+        
+        <a href="#portfolio" class="group flex items-center justify-end pointer-events-auto">
+            <div class="flex items-center gap-0 group-hover:gap-3 rounded-md py-1 pr-1 group-hover:pl-3 group-hover:bg-white/20 group-hover:backdrop-blur-md transition-all duration-500 ease-out border border-transparent group-hover:border-white/20">
+                 <span class="text-xs font-medium text-white max-w-0 group-hover:max-w-[100px] overflow-hidden transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 whitespace-nowrap">Portfolio</span>
+                 <div class="w-1.5 h-1.5 rounded-full bg-white/50 group-hover:bg-white transition-colors duration-300 shrink-0 mx-1.5"></div>
+            </div>
+        </a>
+
+        <div class="h-8 w-[1px] bg-white/20 my-1 mr-[6px]"></div>
+        
+        <button id="themeToggle" class="group flex items-center justify-end pointer-events-auto">
+            <div class="flex items-center gap-0 group-hover:gap-3 rounded-md p-1 group-hover:px-2 group-hover:bg-white/20 group-hover:backdrop-blur-md transition-all duration-500 ease-out border border-transparent group-hover:border-white/20">
+                 <span class="text-xs font-medium text-white max-w-0 group-hover:max-w-[100px] overflow-hidden transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 whitespace-nowrap">Toggle Theme</span>
+                 <div class="w-4 h-4 relative">
+                    <i data-lucide="sun" class="w-4 h-4 opacity-0 dark:opacity-100 absolute transition-opacity" stroke-width="1.5"></i>
+                    <i data-lucide="moon" class="w-4 h-4 opacity-100 dark:opacity-0 absolute transition-opacity" stroke-width="1.5"></i>
+                 </div>
+            </div>
+        </button>
+
+        <a href="#" class="group flex items-center justify-end pointer-events-auto">
+            <div class="flex items-center gap-0 group-hover:gap-3 rounded-md p-1 group-hover:px-2 group-hover:bg-white/20 group-hover:backdrop-blur-md transition-all duration-500 ease-out border border-transparent group-hover:border-white/20">
+                 <span class="text-xs font-medium text-white max-w-0 group-hover:max-w-[150px] overflow-hidden transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 whitespace-nowrap">Modular Design Studio</span>
+                 <div class="w-4 h-4 relative flex items-center justify-center">
+                    <i data-lucide="palette" class="w-4 h-4" stroke-width="1.5"></i>
+                 </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Top Navigation -->
+    <nav class="fixed top-0 w-full z-40 transition-all duration-500 border-b border-white/5 bg-white/80 dark:bg-black/80 backdrop-blur-sm">
+        <div class="w-full px-6 md:px-12 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="#" class="flex items-center gap-3 group transition-all duration-300">
+                    <div class="border border-black/20 dark:border-white/20 group-hover:border-blue-600 p-1 w-9 h-9 flex items-center justify-center transition-colors">
+                        <span class="font-serif font-bold text-base text-black dark:text-white group-hover:text-blue-600 transition-colors">KY</span>
+                    </div>
+                    <span class="text-lg font-bold tracking-tight text-black dark:text-white group-hover:text-blue-600 transition-colors uppercase">KLYERA</span>
+                </a>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#" class="hidden md:flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-black dark:text-white hover:text-blue-600 transition-colors">
+                    <i data-lucide="user" class="w-3.5 h-3.5" stroke-width="1.5"></i> Client Portal
+                </a>
+                <button id="open-menu" class="w-10 h-10 rounded-full border border-black/20 dark:border-white/20 flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-white/10 hover:text-blue-600 dark:hover:text-blue-600 hover:border-blue-600 text-black dark:text-white transition-all">
+                    <i data-lucide="menu" class="w-5 h-5" stroke-width="1.5"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20 gap-x-3 gap-y-3">
+        
+        <!-- Hero Section -->
+        <section class="overflow-hidden dark:bg-[#050505] bg-neutral-50 pt-24 pb-12 relative" id="inspiration">
+            <div class="max-w-[1800px] mx-auto px-6 md:px-12 text-center mb-12 relative z-10">
+                <span class="text-brand-600 font-bold text-xs tracking-widest uppercase mb-4 block animate-fade-in">Visual Library</span>
+                <h1 class="text-5xl md:text-7xl font-medium text-black dark:text-white mb-6 tracking-tighter animate-fade-in" style="animation-delay: 100ms;">
+                    Built For <span class="font-serif italic text-brand-600">Showing Off</span>
+                </h1>
+                <p class="text-neutral-500 dark:text-neutral-400 text-lg md:text-xl font-light max-w-2xl mx-auto animate-fade-in" style="animation-delay: 200ms;">
+                    Explore our curated gallery of digital experiences. From modular efficiency to custom-coded masterpieces, see how we bring different industries to life.
+                </p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex justify-center mb-12 animate-fade-in relative z-20" style="animation-delay: 300ms;">
+                <div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-white/5 p-1 rounded-full inline-flex shadow-lg dark:shadow-none">
+                    <button onclick="filterPortfolio('all')" id="tab-all" class="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all bg-black dark:bg-white text-white dark:text-black shadow-sm">All Websites</button>
+                    <button onclick="filterPortfolio('modular')" id="tab-modular" class="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white">Modular Build</button>
+                    <button onclick="filterPortfolio('custom')" id="tab-custom" class="px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white">Custom Build</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Grid Section -->
+        <section id="portfolio" class="pb-24 bg-neutral-50 dark:bg-[#050505] transition-colors relative px-6 md:px-12">
+            <div class="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                
+                <!-- Portfolio Item 1: Car Dealer (Custom) -->
+                <div class="portfolio-item custom group w-full flex flex-col gap-4 animate-fade-in" style="animation-delay: 100ms;">
+                    <!-- Mini Website Preview -->
+                    <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-neutral-200 dark:border-white/10 shadow-sm group-hover:shadow-2xl group-hover:shadow-brand-500/10 transition-all duration-500 group-hover:-translate-y-1 bg-white dark:bg-neutral-900">
+                        <!-- Browser Bar -->
+                        <div class="h-8 bg-neutral-100 dark:bg-neutral-800 border-b border-neutral-200 dark:border-white/5 flex items-center px-4 gap-1.5">
+                            <div class="w-2.5 h-2.5 rounded-full bg-red-400/80"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-yellow-400/80"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-green-400/80"></div>
+                        </div>
+                        <!-- Site Content (Car Dealer) -->
+                        <div class="h-full w-full bg-[#111] text-white flex flex-col relative overflow-hidden">
+                            <!-- Nav -->
+                            <div class="flex justify-between items-center p-4 border-b border-white/10 z-10">
+                                <span class="font-bold tracking-tighter italic text-xs uppercase">APEX</span>
+                                <div class="flex gap-2">
+                                    <div class="w-8 h-0.5 bg-white"></div>
+                                </div>
+                            </div>
+                            <!-- Hero -->
+                            <div class="flex-1 flex flex-col justify-center px-6 relative z-10">
+                                <span class="text-[10px] text-red-500 font-bold uppercase tracking-widest mb-2">Performance</span>
+                                <h3 class="text-2xl font-bold leading-none mb-3">Limitless<br>Speed.</h3>
+                                <div class="w-20 h-6 bg-white text-black text-[8px] font-bold flex items-center justify-center uppercase">Discover</div>
+                            </div>
+                            <!-- Decorative Circle -->
+                            <div class="absolute -right-10 top-1/2 -translate-y-1/2 w-48 h-48 rounded-full bg-gradient-to-tr from-red-600 to-transparent opacity-20 blur-2xl"></div>
+                        </div>
+                    </div>
+                    <!-- Info -->
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-medium text-black dark:text-white">Apex Motors</h3>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest bg-brand-100 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-200 dark:border-brand-500/20">Custom Build</span>
+                            </div>
+                        </div>
+                        <a href="#" class="flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-brand-600 transition-colors mt-1.5">
+                            View Website <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 2: Florist (Modular) -->
+                <div class="portfolio-item modular group w-full flex flex-col gap-4 animate-fade-in" style="animation-delay: 200ms;">
+                    <!-- Mini Website Preview -->
+                    <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-neutral-200 dark:border-white/10 shadow-sm group-hover:shadow-2xl group-hover:shadow-pink-500/10 transition-all duration-500 group-hover:-translate-y-1 bg-white dark:bg-neutral-900">
+                        <!-- Browser Bar -->
+                        <div class="h-8 bg-neutral-100 dark:bg-neutral-800 border-b border-neutral-200 dark:border-white/5 flex items-center px-4 gap-1.5">
+                            <div class="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-600"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-600"></div>
+                        </div>
+                        <!-- Site Content (Florist) -->
+                        <div class="h-full w-full bg-[#fdf2f8] text-neutral-800 flex flex-col relative overflow-hidden">
+                            <!-- Nav -->
+                            <div class="flex justify-center items-center py-4 z-10">
+                                <span class="font-serif font-semibold text-lg text-pink-900">Petal &amp; Stem</span>
+                            </div>
+                            <!-- Hero -->
+                            <div class="flex-1 flex flex-col items-center text-center px-4 pt-2 relative z-10">
+                                <h3 class="font-serif text-2xl text-pink-950 leading-tight mb-2">Curated<br>Arrangements</h3>
+                                <p class="text-[8px] max-w-[150px] mb-3 opacity-60">Hand-picked flowers delivered to your door.</p>
+                                <div class="px-3 py-1 border border-pink-900/20 text-pink-900 text-[8px] uppercase tracking-widest">Shop Now</div>
+                            </div>
+                            <!-- Background Pattern -->
+                            <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-30 mix-blend-multiply"></div>
+                            <div class="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-pink-200/50 to-transparent"></div>
+                        </div>
+                    </div>
+                    <!-- Info -->
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-medium text-black dark:text-white">Petal &amp; Stem</h3>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 border border-neutral-200 dark:border-white/10">Modular Build</span>
+                            </div>
+                        </div>
+                        <a href="#" class="flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-brand-600 transition-colors mt-1.5">
+                            View Website <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 3: Tech SaaS (Custom) -->
+                <div class="portfolio-item custom group w-full flex flex-col gap-4 animate-fade-in" style="animation-delay: 300ms;">
+                    <!-- Mini Website Preview -->
+                    <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-neutral-200 dark:border-white/10 shadow-sm group-hover:shadow-2xl group-hover:shadow-blue-500/10 transition-all duration-500 group-hover:-translate-y-1 bg-white dark:bg-neutral-900">
+                        <!-- Browser Bar -->
+                        <div class="h-8 bg-neutral-100 dark:bg-neutral-800 border-b border-neutral-200 dark:border-white/5 flex items-center px-4 gap-1.5">
+                            <div class="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-600"></div>
+                        </div>
+                        <!-- Site Content (SaaS) -->
+                        <div class="h-full w-full bg-[#0f172a] text-white flex flex-col relative overflow-hidden font-sans">
+                            <!-- Nav -->
+                            <div class="flex justify-between items-center px-4 py-3 z-10 border-b border-white/5">
+                                <div class="flex gap-1 items-center">
+                                    <div class="w-3 h-3 bg-blue-500 rounded-sm"></div>
+                                    <span class="font-bold text-[10px]">NEXUS</span>
+                                </div>
+                                <span class="text-[8px] opacity-50">Log In</span>
+                            </div>
+                            <!-- Hero -->
+                            <div class="flex-1 p-5 relative z-10 flex flex-col justify-center">
+                                <div class="inline-block px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400 text-[6px] font-mono mb-2 w-max">v2.0 Released</div>
+                                <h3 class="text-xl font-bold leading-tight mb-2">Scale Your<br><span class="text-blue-500">Infrastructure</span></h3>
+                                <div class="flex gap-2">
+                                    <div class="h-5 px-3 bg-blue-600 rounded text-[8px] flex items-center font-bold">Start</div>
+                                    <div class="h-5 px-3 bg-white/10 rounded text-[8px] flex items-center">Docs</div>
+                                </div>
+                            </div>
+                            <!-- Grid Overlay -->
+                            <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:14px_14px]"></div>
+                        </div>
+                    </div>
+                    <!-- Info -->
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-medium text-black dark:text-white">Nexus Cloud</h3>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest bg-brand-100 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-200 dark:border-brand-500/20">Custom Build</span>
+                            </div>
+                        </div>
+                        <a href="#" class="flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-brand-600 transition-colors mt-1.5">
+                            View Website <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 4: Bakery (Modular) -->
+                <div class="portfolio-item modular group w-full flex flex-col gap-4 animate-fade-in" style="animation-delay: 150ms;">
+                    <!-- Mini Website Preview -->
+                    <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-neutral-200 dark:border-white/10 shadow-sm group-hover:shadow-2xl group-hover:shadow-orange-500/10 transition-all duration-500 group-hover:-translate-y-1 bg-white dark:bg-neutral-900">
+                        <!-- Browser Bar -->
+                        <div class="h-8 bg-neutral-100 dark:bg-neutral-800 border-b border-neutral-200 dark:border-white/5 flex items-center px-4 gap-1.5">
+                            <div class="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-600"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-600"></div>
+                        </div>
+                        <!-- Site Content (Bakery) -->
+                        <div class="h-full w-full bg-[#FFFBF0] text-orange-950 flex flex-col relative overflow-hidden">
+                            <!-- Nav -->
+                            <div class="flex justify-between items-center px-4 py-3 z-10">
+                                <span class="font-bold text-[10px] tracking-wide">SWEET<span class="text-orange-500">TOOTH</span></span>
+                                <iconify-icon icon="solar:bag-linear" width="12"></iconify-icon>
+                            </div>
+                            <!-- Hero -->
+                            <div class="flex-1 flex flex-col items-center justify-center text-center px-4 relative z-10">
+                                <div class="w-16 h-16 rounded-full bg-orange-200/50 mb-2 flex items-center justify-center">
+                                    <iconify-icon icon="solar:donut-bitten-linear" class="text-orange-600" width="24"></iconify-icon>
+                                </div>
+                                <h3 class="text-xl font-bold leading-none mb-1">Freshly<br>Baked</h3>
+                                <div class="w-full h-[1px] bg-orange-900/10 my-2 max-w-[50px]"></div>
+                                <span class="text-[8px] font-medium uppercase tracking-widest text-orange-600">Since 1998</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Info -->
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-medium text-black dark:text-white">Sweet Tooth</h3>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 border border-neutral-200 dark:border-white/10">Modular Build</span>
+                            </div>
+                        </div>
+                        <a href="#" class="flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-brand-600 transition-colors mt-1.5">
+                            View Website <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 5: Architect (Custom) -->
+                <div class="portfolio-item custom group w-full flex flex-col gap-4 animate-fade-in" style="animation-delay: 250ms;">
+                    <!-- Mini Website Preview -->
+                    <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-neutral-200 dark:border-white/10 shadow-sm group-hover:shadow-2xl group-hover:shadow-neutral-500/10 transition-all duration-500 group-hover:-translate-y-1 bg-white dark:bg-neutral-900">
+                        <!-- Browser Bar -->
+                        <div class="h-8 bg-neutral-100 dark:bg-neutral-800 border-b border-neutral-200 dark:border-white/5 flex items-center px-4 gap-1.5">
+                            <div class="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-600"></div>
+                        </div>
+                        <!-- Site Content (Architect) -->
+                        <div class="h-full w-full bg-white text-black flex flex-col relative overflow-hidden font-sans border-l-8 border-neutral-100">
+                            <!-- Nav -->
+                            <div class="absolute left-0 top-0 h-full w-12 border-r border-neutral-200 flex flex-col items-center py-4 gap-4 z-20 bg-white">
+                                <div class="w-6 h-6 bg-black"></div>
+                                <div class="flex-1 w-[1px] bg-neutral-200"></div>
+                                <div class="text-[6px] -rotate-90 whitespace-nowrap font-bold tracking-widest">EST 2024</div>
+                            </div>
+                            <!-- Hero -->
+                            <div class="flex-1 pl-16 pr-4 pt-8 pb-4 relative z-10 flex flex-col justify-end">
+                                <h3 class="text-3xl font-light tracking-tighter leading-[0.9] mb-4">FOR<br><span class="font-bold">MODERN</span><br>LIVING</h3>
+                                <div class="flex justify-between items-end border-t border-black pt-2">
+                                    <span class="text-[8px] font-bold">01 / 05</span>
+                                    <iconify-icon icon="solar:arrow-right-up-linear" width="12"></iconify-icon>
+                                </div>
+                            </div>
+                            <!-- Image overlay -->
+                            <div class="absolute right-0 top-0 w-1/2 h-2/3 bg-neutral-200 block z-0"></div>
+                        </div>
+                    </div>
+                    <!-- Info -->
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-medium text-black dark:text-white">Structure Arch</h3>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest bg-brand-100 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-200 dark:border-brand-500/20">Custom Build</span>
+                            </div>
+                        </div>
+                        <a href="#" class="flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-brand-600 transition-colors mt-1.5">
+                            View Website <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 6: Fitness (Modular) -->
+                <div class="portfolio-item modular group w-full flex flex-col gap-4 animate-fade-in" style="animation-delay: 350ms;">
+                    <!-- Mini Website Preview -->
+                    <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-neutral-200 dark:border-white/10 shadow-sm group-hover:shadow-2xl group-hover:shadow-lime-500/10 transition-all duration-500 group-hover:-translate-y-1 bg-white dark:bg-neutral-900">
+                        <!-- Browser Bar -->
+                        <div class="h-8 bg-neutral-100 dark:bg-neutral-800 border-b border-neutral-200 dark:border-white/5 flex items-center px-4 gap-1.5">
+                            <div class="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-600"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-neutral-300 dark:bg-neutral-600"></div>
+                        </div>
+                        <!-- Site Content (Fitness) -->
+                        <div class="h-full w-full bg-[#1a1a1a] text-white flex flex-col relative overflow-hidden font-sans">
+                            <!-- Nav -->
+                            <div class="flex justify-between items-center px-4 py-3 z-10 bg-black/50 backdrop-blur-sm">
+                                <span class="font-black text-[10px] italic text-lime-400 uppercase">KINETIC</span>
+                                <div class="w-4 h-4 rounded-sm border border-white/20 flex flex-col justify-center gap-0.5 px-0.5">
+                                    <div class="w-full h-[1px] bg-white"></div>
+                                    <div class="w-full h-[1px] bg-white"></div>
+                                </div>
+                            </div>
+                            <!-- Hero -->
+                            <div class="flex-1 flex flex-col justify-center items-start px-4 relative z-10">
+                                <h3 class="text-2xl font-black italic uppercase leading-none mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white to-neutral-500">Train<br>Harder</h3>
+                                <div class="px-3 py-1 bg-lime-500 text-black font-bold text-[8px] skew-x-[-10deg] uppercase">Join Now</div>
+                            </div>
+                            <!-- BG Detail -->
+                            <div class="absolute right-0 bottom-0 w-32 h-32 bg-lime-500/20 blur-2xl rounded-full"></div>
+                        </div>
+                    </div>
+                    <!-- Info -->
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-lg font-medium text-black dark:text-white">Kinetic Gym</h3>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 border border-neutral-200 dark:border-white/10">Modular Build</span>
+                            </div>
+                        </div>
+                        <a href="#" class="flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-brand-600 transition-colors mt-1.5">
+                            View Website <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-black border-t border-neutral-100 dark:border-white/5 py-12 md:py-16 text-xs transition-colors">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+            
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 md:mb-24 gap-8">
+                <!-- Logo Left -->
+                <div class="flex items-center gap-3">
+                    <div class="border border-black dark:border-white p-1 w-9 h-9 flex items-center justify-center">
+                        <span class="font-serif font-bold text-base text-black dark:text-white">KY</span>
+                    </div>
+                    <span class="text-base font-bold tracking-tight text-black dark:text-white uppercase">KLYERA</span>
+                </div>
+
+                <!-- Socials & Location Right -->
+                <div class="flex flex-col items-start md:items-end gap-5">
+                    <div class="flex gap-4 items-center">
+                         <a href="#" class="text-neutral-400 hover:text-blue-600 transition-colors">
+                            <i data-lucide="music-2" class="w-4 h-4" stroke-width="1.5"></i>
+                         </a>
+                         <a href="#" class="text-neutral-400 hover:text-blue-600 transition-colors">
+                             <i data-lucide="instagram" class="w-4 h-4" stroke-width="1.5"></i>
+                         </a>
+                         <a href="#" class="text-neutral-400 hover:text-blue-600 transition-colors">
+                             <i data-lucide="linkedin" class="w-4 h-4" stroke-width="1.5"></i>
+                         </a>
+                    </div>
+                    <div class="flex items-center gap-2 text-neutral-500">
+                        <i data-lucide="map-pin" class="w-3.5 h-3.5" stroke-width="1.5"></i>
+                        <span>Manchester, United Kingdom</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Row -->
+            <div class="flex flex-col md:flex-row justify-between items-center text-neutral-400 border-t border-neutral-100 dark:border-white/5 pt-8 gap-4">
+                <p class="transition-all duration-700 translate-y-10 opacity-0">© 2026 WebSpec Ltd. All rights reserved.</p>
+                <div class="flex gap-8">
+                    <a href="#" class="hover:text-blue-600 transition-colors">Terms &amp; Conditions</a>
+                    <a href="#" class="hover:text-blue-600 transition-colors">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        // Mobile Menu Logic
+        const openMenuBtn = document.getElementById('open-menu');
+        const closeMenuBtn = document.getElementById('close-menu');
+        const menuOverlay = document.getElementById('full-screen-menu');
+        const menuLinks = document.querySelectorAll('.menu-link');
+
+        function toggleMenu() {
+            const isHidden = menuOverlay.classList.contains('pointer-events-none');
+            if (isHidden) {
+                menuOverlay.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                menuOverlay.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        openMenuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+        menuLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            html.classList.add('dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('translate-y-0', 'opacity-100');
+                    entry.target.classList.remove('translate-y-10', 'opacity-0');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('footer p').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Portfolio Filtering Logic
+        function filterPortfolio(filter) {
+            const items = document.querySelectorAll('.portfolio-item');
+            const btns = {
+                'all': document.getElementById('tab-all'),
+                'modular': document.getElementById('tab-modular'),
+                'custom': document.getElementById('tab-custom')
+            };
+
+            // Update Tab Styles
+            Object.keys(btns).forEach(key => {
+                const btn = btns[key];
+                if (key === filter) {
+                    btn.className = "px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all bg-black dark:bg-white text-white dark:text-black shadow-sm";
+                } else {
+                    btn.className = "px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white";
+                }
+            });
+
+            // Filter Items
+            items.forEach(item => {
+                if (filter === 'all') {
+                    item.classList.remove('hidden');
+                    item.classList.add('flex');
+                    // Add animation restart effect
+                    item.style.animation = 'none';
+                    item.offsetHeight; /* trigger reflow */
+                    item.style.animation = 'fadeIn 0.5s ease-out forwards';
+                } else {
+                    if (item.classList.contains(filter)) {
+                        item.classList.remove('hidden');
+                        item.classList.add('flex');
+                        item.style.animation = 'none';
+                        item.offsetHeight; /* trigger reflow */
+                        item.style.animation = 'fadeIn 0.5s ease-out forwards';
+                    } else {
+                        item.classList.add('hidden');
+                        item.classList.remove('flex');
+                    }
+                }
+            });
+        }
+    </script>
+
+
+</body></html>

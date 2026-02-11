@@ -1,0 +1,609 @@
+<html lang="en" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLYERA | Packages &amp; Pricing</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    letterSpacing: {
+                        tighter: '-0.04em',
+                        tight: '-0.02em',
+                        widest: '0.15em',
+                    },
+                    backgroundImage: {
+                        'noise': "url('https://grainy-gradients.vercel.app/noise.svg')",
+                    },
+                    animation: {
+                        'marquee': 'marquee 60s linear infinite',
+                        'marquee-reverse': 'marqueeReverse 60s linear infinite',
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        marqueeReverse: {
+                            '0%': { transform: 'translateX(-50%)' },
+                            '100%': { transform: 'translateX(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { -webkit-font-smoothing: antialiased; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        ::selection { background: rgba(59, 130, 246, 0.3); color: white; }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-black text-neutral-900 dark:text-neutral-100 transition-colors duration-700 font-sans selection:bg-brand-500/30">
+
+    <!-- Full Screen Menu Overlay -->
+    <div id="full-screen-menu" class="fixed inset-0 bg-white dark:bg-neutral-950 z-50 flex flex-col justify-center items-center opacity-0 pointer-events-none transition-all duration-500 backdrop-blur-3xl">
+        <button id="close-menu" class="absolute top-6 right-6 md:right-12 w-10 h-10 rounded-full border border-neutral-200 dark:border-white/20 flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-white/10 text-black dark:text-white transition-all hover:text-blue-600 dark:hover:text-blue-600 hover:border-blue-600">
+            <i data-lucide="x" class="w-5 h-5" stroke-width="1.5"></i>
+        </button>
+        
+        <nav class="flex flex-col gap-6 text-center mb-12">
+            <a href="#" class="menu-link text-3xl md:text-5xl font-light text-neutral-400 hover:text-blue-600 transition-colors duration-300">Home</a>
+            <a href="#packages" class="menu-link text-3xl md:text-5xl font-light text-neutral-400 hover:text-blue-600 transition-colors duration-300">Modular Build Websites</a>
+            <a href="#packages" class="menu-link text-3xl md:text-5xl font-light text-neutral-400 hover:text-blue-600 transition-colors duration-300">Custom Build Websites</a>
+            <a href="#inspiration" class="menu-link text-3xl md:text-5xl font-light text-neutral-400 hover:text-blue-600 transition-colors duration-300">Portfolio</a>
+        </nav>
+
+        <a href="#contact" class="uppercase hover:bg-blue-600 hover:text-white transition-all duration-300 text-xs font-bold text-white tracking-widest bg-brand-500 py-4 px-8 rounded-full menu-link">
+            Request Free Website Assessment
+        </a>
+    </div>
+
+    <!-- Right Navigation -->
+    <div class="fixed -translate-y-1/2 hidden lg:flex flex-col text-white mix-blend-difference z-40 top-1/2 right-6 items-end gap-4 pointer-events-none">
+        
+        <a href="#inspiration" class="group flex items-center justify-end pointer-events-auto">
+            <div class="flex items-center gap-0 group-hover:gap-3 rounded-md py-1 pr-1 group-hover:pl-3 group-hover:bg-white/20 group-hover:backdrop-blur-md transition-all duration-500 ease-out border border-transparent group-hover:border-white/20">
+                 <span class="text-xs font-medium text-white max-w-0 group-hover:max-w-[100px] overflow-hidden transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 whitespace-nowrap">Inspiration</span>
+                 <div class="w-1.5 h-1.5 rounded-full bg-white/50 group-hover:bg-white transition-colors duration-300 shrink-0 mx-1.5"></div>
+            </div>
+        </a>
+
+        <a href="#packages" class="group flex items-center justify-end pointer-events-auto">
+            <div class="flex items-center gap-0 group-hover:gap-3 rounded-md py-1 pr-1 group-hover:pl-3 group-hover:bg-white/20 group-hover:backdrop-blur-md transition-all duration-500 ease-out border border-transparent group-hover:border-white/20">
+                 <span class="text-xs font-medium text-white max-w-0 group-hover:max-w-[100px] overflow-hidden transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 whitespace-nowrap">Packages</span>
+                 <div class="w-1.5 h-1.5 rounded-full bg-white/50 group-hover:bg-white transition-colors duration-300 shrink-0 mx-1.5"></div>
+            </div>
+        </a>
+
+        <a href="#faq" class="group flex items-center justify-end pointer-events-auto">
+            <div class="flex items-center gap-0 group-hover:gap-3 rounded-md py-1 pr-1 group-hover:pl-3 group-hover:bg-white/20 group-hover:backdrop-blur-md transition-all duration-500 ease-out border border-transparent group-hover:border-white/20">
+                 <span class="text-xs font-medium text-white max-w-0 group-hover:max-w-[100px] overflow-hidden transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 whitespace-nowrap">FAQ</span>
+                 <div class="w-1.5 h-1.5 rounded-full bg-white/50 group-hover:bg-white transition-colors duration-300 shrink-0 mx-1.5"></div>
+            </div>
+        </a>
+
+        <div class="h-8 w-[1px] bg-white/20 my-1 mr-[6px]"></div>
+        
+        <button id="themeToggle" class="group flex items-center justify-end pointer-events-auto">
+            <div class="flex items-center gap-0 group-hover:gap-3 rounded-md p-1 group-hover:px-2 group-hover:bg-white/20 group-hover:backdrop-blur-md transition-all duration-500 ease-out border border-transparent group-hover:border-white/20">
+                 <span class="text-xs font-medium text-white max-w-0 group-hover:max-w-[100px] overflow-hidden transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 whitespace-nowrap">Toggle Theme</span>
+                 <div class="w-4 h-4 relative">
+                    <i data-lucide="sun" class="w-4 h-4 opacity-0 dark:opacity-100 absolute transition-opacity" stroke-width="1.5"></i>
+                    <i data-lucide="moon" class="w-4 h-4 opacity-100 dark:opacity-0 absolute transition-opacity" stroke-width="1.5"></i>
+                 </div>
+            </div>
+        </button>
+
+        <a href="#" class="group flex items-center justify-end pointer-events-auto">
+            <div class="flex items-center gap-0 group-hover:gap-3 rounded-md p-1 group-hover:px-2 group-hover:bg-white/20 group-hover:backdrop-blur-md transition-all duration-500 ease-out border border-transparent group-hover:border-white/20">
+                 <span class="text-xs font-medium text-white max-w-0 group-hover:max-w-[150px] overflow-hidden transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 whitespace-nowrap">Modular Design Studio</span>
+                 <div class="w-4 h-4 relative flex items-center justify-center">
+                    <i data-lucide="palette" class="w-4 h-4" stroke-width="1.5"></i>
+                 </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Top Navigation -->
+    <nav class="fixed top-0 w-full z-40 transition-all duration-500 border-b border-white/5 bg-white/80 dark:bg-black/80 backdrop-blur-sm">
+        <div class="w-full px-6 md:px-12 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="#" class="flex items-center gap-3 group transition-all duration-300">
+                    <div class="border border-black/20 dark:border-white/20 group-hover:border-blue-600 p-1 w-9 h-9 flex items-center justify-center transition-colors">
+                        <span class="font-serif font-bold text-base text-black dark:text-white group-hover:text-blue-600 transition-colors">KY</span>
+                    </div>
+                    <span class="text-lg font-bold tracking-tight text-black dark:text-white group-hover:text-blue-600 transition-colors uppercase">KLYERA</span>
+                </a>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#" class="hidden md:flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-black dark:text-white hover:text-blue-600 transition-colors">
+                    <i data-lucide="user" class="w-3.5 h-3.5" stroke-width="1.5"></i> Client Portal
+                </a>
+                <button id="open-menu" class="w-10 h-10 rounded-full border border-black/20 dark:border-white/20 flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-white/10 hover:text-blue-600 dark:hover:text-blue-600 hover:border-blue-600 text-black dark:text-white transition-all">
+                    <i data-lucide="menu" class="w-5 h-5" stroke-width="1.5"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20 gap-x-3 gap-y-3">
+        <!-- Inspiration Section -->
+        <section class="overflow-hidden dark:bg-[#050505] bg-neutral-50 pt-24 pb-24 relative gap-x-3 gap-y-3" id="inspiration">
+            <div class="max-w-[1800px] mx-auto px-6 md:px-12 text-center mb-16 relative z-10">
+                <span class="text-brand-600 font-bold text-xs tracking-widest uppercase mb-4 block animate-fade-in">Visual Library</span>
+                <h1 class="text-5xl md:text-7xl font-medium text-black dark:text-white mb-6 tracking-tighter animate-fade-in" style="animation-delay: 100ms;">
+                    Built For <span class="font-serif italic text-brand-600">You</span>
+                </h1>
+                <p class="text-neutral-500 dark:text-neutral-400 text-lg md:text-xl font-light max-w-2xl mx-auto animate-fade-in" style="animation-delay: 200ms;">
+                    A curated selection of digital solutions engineered for performance. From high-conversion brochure sites to robust custom ecommerce architectures, explore the perfect framework to elevate your online presence.
+                </p>
+            </div>
+
+            <!-- Scrolling Marquee of Page Names -->
+            <div class="relative w-full overflow-hidden mask-gradient-x pb-8">
+                <!-- Overlay Gradients for smooth fade edges -->
+                <div class="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-neutral-50 dark:from-[#050505] to-transparent z-20"></div>
+                <div class="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-neutral-50 dark:from-[#050505] to-transparent z-20"></div>
+
+                <div class="flex gap-6 w-max animate-marquee hover:pause">
+                    <!-- Text Cards for Loop -->
+                    <div class="min-w-[320px] h-[220px] flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500/50 transition-all duration-500 group">
+                        <span class="text-2xl md:text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200 group-hover:text-brand-600 transition-colors">About Us</span>
+                    </div>
+
+                    <div class="min-w-[320px] h-[220px] flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500/50 transition-all duration-500 group">
+                        <span class="text-2xl md:text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200 group-hover:text-brand-600 transition-colors">Services</span>
+                    </div>
+
+                    <div class="min-w-[320px] h-[220px] flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500/50 transition-all duration-500 group">
+                        <span class="text-2xl md:text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200 group-hover:text-brand-600 transition-colors">Shop</span>
+                    </div>
+
+                    <div class="min-w-[320px] h-[220px] flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500/50 transition-all duration-500 group">
+                        <span class="text-2xl md:text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200 group-hover:text-brand-600 transition-colors">Contact</span>
+                    </div>
+
+                    <div class="min-w-[320px] h-[220px] flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500/50 transition-all duration-500 group">
+                        <span class="text-2xl md:text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200 group-hover:text-brand-600 transition-colors">News</span>
+                    </div>
+
+                    <div class="min-w-[320px] h-[220px] flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500/50 transition-all duration-500 group">
+                        <span class="text-2xl md:text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200 group-hover:text-brand-600 transition-colors">Projects</span>
+                    </div>
+
+                    <div class="min-w-[320px] h-[220px] flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500/50 transition-all duration-500 group">
+                        <span class="text-2xl md:text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200 group-hover:text-brand-600 transition-colors">Reviews</span>
+                    </div>
+                    
+                    <div class="min-w-[320px] h-[220px] flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500/50 transition-all duration-500 group">
+                        <span class="text-2xl md:text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200 group-hover:text-brand-600 transition-colors">Meet The Team</span>
+                    </div>
+
+                    <div class="min-w-[320px] h-[220px] flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500/50 transition-all duration-500 group">
+                        <span class="text-2xl md:text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200 group-hover:text-brand-600 transition-colors">FAQ</span>
+                    </div>
+
+                    <div class="min-w-[320px] h-[220px] flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500/50 transition-all duration-500 group">
+                        <span class="text-2xl md:text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200 group-hover:text-brand-600 transition-colors">Booking</span>
+                    </div>
+
+                    <div class="min-w-[320px] h-[220px] flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500/50 transition-all duration-500 group">
+                        <span class="text-2xl md:text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200 group-hover:text-brand-600 transition-colors">Gallery</span>
+                    </div>
+
+                    <div class="min-w-[320px] h-[220px] flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500/50 transition-all duration-500 group">
+                        <span class="text-2xl md:text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200 group-hover:text-brand-600 transition-colors">Videos</span>
+                    </div>
+
+                    <div class="min-w-[320px] h-[220px] flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500/50 transition-all duration-500 group">
+                        <span class="text-2xl md:text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200 group-hover:text-brand-600 transition-colors">Documents</span>
+                    </div>
+
+                    <div class="min-w-[320px] h-[220px] flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500/50 transition-all duration-500 group">
+                        <span class="text-2xl md:text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200 group-hover:text-brand-600 transition-colors">Customer Portal</span>
+                    </div>
+
+                    <!-- Duplicates for Infinite Scroll -->
+                    <div class="min-w-[320px] h-[220px] flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500/50 transition-all duration-500 group">
+                        <span class="text-2xl md:text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200 group-hover:text-brand-600 transition-colors">About Us</span>
+                    </div>
+                    <div class="min-w-[320px] h-[220px] flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500/50 transition-all duration-500 group">
+                        <span class="text-2xl md:text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200 group-hover:text-brand-600 transition-colors">Services</span>
+                    </div>
+                    <div class="min-w-[320px] h-[220px] flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500/50 transition-all duration-500 group">
+                        <span class="text-2xl md:text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200 group-hover:text-brand-600 transition-colors">Shop</span>
+                    </div>
+                    <div class="min-w-[320px] h-[220px] flex items-center justify-center bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500/50 transition-all duration-500 group">
+                        <span class="text-2xl md:text-3xl font-light tracking-tight text-neutral-800 dark:text-neutral-200 group-hover:text-brand-600 transition-colors">Contact</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Packages Section -->
+        <section id="packages" class="py-24 bg-white dark:bg-black transition-colors relative">
+            <div class="px-6 md:px-12 max-w-[1600px] mx-auto">
+                
+                <div class="flex flex-col items-center justify-center mb-16 space-y-8">
+                    <h2 class="text-4xl md:text-5xl font-medium text-black dark:text-white tracking-tighter">Choose Your Structure</h2>
+                    
+                    <!-- Tabs -->
+                    <div class="bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-white/5 p-1 rounded-full inline-flex relative">
+                        <button onclick="switchPricing('landing')" id="tab-landing" class="px-8 py-3 rounded-full text-sm font-medium transition-all shadow-sm bg-white dark:bg-neutral-800 text-black dark:text-white border border-black/5 dark:border-white/5">Landing Pages</button>
+                        <button onclick="switchPricing('brochure')" id="tab-brochure" class="px-8 py-3 rounded-full text-sm font-medium transition-all text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white">Brochure</button>
+                        <button onclick="switchPricing('ecommerce')" id="tab-ecommerce" class="px-8 py-3 rounded-full text-sm font-medium transition-all text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white">E-Commerce</button>
+                    </div>
+                </div>
+
+                <!-- Landing Pages Content (2 Packages) -->
+                <div id="content-landing" class="pricing-content grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <!-- Package 1 -->
+                    <div class="group flex flex-col p-8 border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500 dark:hover:border-brand-500 transition-all duration-300 relative bg-neutral-50/50 dark:bg-[#080808]">
+                        <h3 class="text-xl font-medium text-black dark:text-white mb-2">Single Page</h3>
+                        <p class="text-sm text-neutral-500 mb-6 h-10">Single page presence for personal brands.</p>
+                        <div class="text-4xl font-bold text-black dark:text-white mb-8 tracking-tight">£499</div>
+                        <ul class="space-y-4 mb-8 flex-1">
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Single Scroll Layout</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Mobile Responsive</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Contact Form</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Basic SEO Setup</li>
+                        </ul>
+                        <a href="#" class="text-xs font-medium text-neutral-400 hover:text-brand-600 flex items-center justify-center gap-1 mb-4 transition-colors">See Full Details <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                        <a href="#" class="w-full block text-center bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-white/10 text-black dark:text-white py-3 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors rounded-sm">Select Package</a>
+                    </div>
+                    <!-- Package 2 (Highlighted) -->
+                    <div class="group flex flex-col p-8 border border-brand-500 dark:border-brand-500 rounded-xl relative bg-white dark:bg-black shadow-2xl shadow-brand-900/10">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-500 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Popular</div>
+                        <h3 class="text-xl font-medium text-black dark:text-white mb-2">Duo Page</h3>
+                        <p class="text-sm text-neutral-500 mb-6 h-10">High-converting landing page for campaigns.</p>
+                        <div class="text-4xl font-bold text-black dark:text-white mb-8 tracking-tight">£899</div>
+                        <ul class="space-y-4 mb-8 flex-1">
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Everything in Single Page</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Custom Animations</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Analytics Integration</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> A/B Testing Setup</li>
+                        </ul>
+                        <a href="#" class="text-xs font-medium text-neutral-400 hover:text-brand-600 flex items-center justify-center gap-1 mb-4 transition-colors">See Full Details <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                        <a href="#" class="w-full block text-center bg-brand-600 text-white py-3 text-xs font-bold uppercase tracking-widest hover:bg-brand-700 transition-colors rounded-sm">Select Package</a>
+                    </div>
+                </div>
+
+                <!-- Brochure Content (Hidden) -->
+                <div id="content-brochure" class="pricing-content hidden grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Package 1 -->
+                    <div class="group flex flex-col p-8 border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500 dark:hover:border-brand-500 transition-all duration-300 relative bg-neutral-50/50 dark:bg-[#080808]">
+                        <h3 class="text-xl font-medium text-black dark:text-white mb-2">5 Page</h3>
+                        <p class="text-sm text-neutral-500 mb-6 h-10">Professional 5 page website.</p>
+                        <div class="text-4xl font-bold text-black dark:text-white mb-8 tracking-tight">£1,299</div>
+                        <ul class="space-y-4 mb-8 flex-1">
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> 5 Unique Pages</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> CMS for Blog</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> SEO Foundation</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Social Integration</li>
+                        </ul>
+                        <a href="#" class="text-xs font-medium text-neutral-400 hover:text-brand-600 flex items-center justify-center gap-1 mb-4 transition-colors">See Full Details <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                        <a href="#" class="w-full block text-center bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-white/10 text-black dark:text-white py-3 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors rounded-sm">Select Package</a>
+                    </div>
+                    <!-- Package 2 (Highlighted) -->
+                    <div class="group flex flex-col p-8 border border-brand-500 dark:border-brand-500 rounded-xl relative bg-white dark:bg-black shadow-2xl shadow-brand-900/10">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-500 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Best Value</div>
+                        <h3 class="text-xl font-medium text-black dark:text-white mb-2">7 Page</h3>
+                        <p class="text-sm text-neutral-500 mb-6 h-10">Complete 7 page corporate identity.</p>
+                        <div class="text-4xl font-bold text-black dark:text-white mb-8 tracking-tight">£2,499</div>
+                        <ul class="space-y-4 mb-8 flex-1">
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> 7 Unique Pages</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Advanced CMS Fields</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Custom Animations</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Newsletter Setup</li>
+                        </ul>
+                        <a href="#" class="text-xs font-medium text-neutral-400 hover:text-brand-600 flex items-center justify-center gap-1 mb-4 transition-colors">See Full Details <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                        <a href="#" class="w-full block text-center bg-brand-600 text-white py-3 text-xs font-bold uppercase tracking-widest hover:bg-brand-700 transition-colors rounded-sm">Select Package</a>
+                    </div>
+                    <!-- Package 3 -->
+                    <div class="group flex flex-col p-8 border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500 dark:hover:border-brand-500 transition-all duration-300 relative bg-neutral-50/50 dark:bg-[#080808]">
+                        <h3 class="text-xl font-medium text-black dark:text-white mb-2">9 Page</h3>
+                        <p class="text-sm text-neutral-500 mb-6 h-10">Extended 9 page site with custom integrations.</p>
+                        <div class="text-4xl font-bold text-black dark:text-white mb-8 tracking-tight">£4,999+</div>
+                        <ul class="space-y-4 mb-8 flex-1">
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> 9 Unique Pages</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Multi-language Support</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Intranet Capabilities</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Priority Support</li>
+                        </ul>
+                        <a href="#" class="text-xs font-medium text-neutral-400 hover:text-brand-600 flex items-center justify-center gap-1 mb-4 transition-colors">See Full Details <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                        <a href="#" class="w-full block text-center bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-white/10 text-black dark:text-white py-3 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors rounded-sm">Contact Us</a>
+                    </div>
+                </div>
+
+                <!-- Ecommerce Content (Hidden) -->
+                <div id="content-ecommerce" class="pricing-content hidden grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Package 1 -->
+                    <div class="group flex flex-col p-8 border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500 dark:hover:border-brand-500 transition-all duration-300 relative bg-neutral-50/50 dark:bg-[#080808]">
+                        <h3 class="text-xl font-medium text-black dark:text-white mb-2">7 Page + Checkout</h3>
+                        <p class="text-sm text-neutral-500 mb-6 h-10">Basic store setup using premium themes.</p>
+                        <div class="text-4xl font-bold text-black dark:text-white mb-8 tracking-tight">£1,999</div>
+                        <ul class="space-y-4 mb-8 flex-1">
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Up to 50 Products</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Payment Gateway Setup</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Basic Theme Customization</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Training Session</li>
+                        </ul>
+                        <a href="#" class="text-xs font-medium text-neutral-400 hover:text-brand-600 flex items-center justify-center gap-1 mb-4 transition-colors">See Full Details <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                        <a href="#" class="w-full block text-center bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-white/10 text-black dark:text-white py-3 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors rounded-sm">Select Package</a>
+                    </div>
+                    <!-- Package 2 (Highlighted) -->
+                    <div class="group flex flex-col p-8 border border-brand-500 dark:border-brand-500 rounded-xl relative bg-white dark:bg-black shadow-2xl shadow-brand-900/10">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-500 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Most Popular</div>
+                        <h3 class="text-xl font-medium text-black dark:text-white mb-2">9 Page + Checkout</h3>
+                        <p class="text-sm text-neutral-500 mb-6 h-10">Fully custom headless design &amp; dev.</p>
+                        <div class="text-4xl font-bold text-black dark:text-white mb-8 tracking-tight">£5,999</div>
+                        <ul class="space-y-4 mb-8 flex-1">
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Unlimited Products</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Headless Architecture</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Custom Cart &amp; Checkout</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Advanced Filtering</li>
+                        </ul>
+                        <a href="#" class="text-xs font-medium text-neutral-400 hover:text-brand-600 flex items-center justify-center gap-1 mb-4 transition-colors">See Full Details <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                        <a href="#" class="w-full block text-center bg-brand-600 text-white py-3 text-xs font-bold uppercase tracking-widest hover:bg-brand-700 transition-colors rounded-sm">Select Package</a>
+                    </div>
+                    <!-- Package 3 -->
+                    <div class="group flex flex-col p-8 border border-neutral-200 dark:border-white/10 rounded-xl hover:border-brand-500 dark:hover:border-brand-500 transition-all duration-300 relative bg-neutral-50/50 dark:bg-[#080808]">
+                        <h3 class="text-xl font-medium text-black dark:text-white mb-2">Unlimited Page + Checkout</h3>
+                        <p class="text-sm text-neutral-500 mb-6 h-10">Multi-vendor platform development.</p>
+                        <div class="text-4xl font-bold text-black dark:text-white mb-8 tracking-tight">Custom</div>
+                        <ul class="space-y-4 mb-8 flex-1">
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Multi-vendor Logic</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Commission Systems</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> User Dashboards</li>
+                            <li class="text-sm text-neutral-600 dark:text-neutral-400 flex gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Scalable Infrastructure</li>
+                        </ul>
+                        <a href="#" class="text-xs font-medium text-neutral-400 hover:text-brand-600 flex items-center justify-center gap-1 mb-4 transition-colors">See Full Details <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
+                        <a href="#" class="w-full block text-center bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-white/10 text-black dark:text-white py-3 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors rounded-sm">Consultation</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Premium FAQ Section -->
+        <section id="faq" class="py-24 border-t border-neutral-200 dark:border-white/5 bg-neutral-50 dark:bg-[#050505]">
+            <div class="px-6 md:px-12 max-w-[1600px] mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                    <!-- Left: Context -->
+                    <div class="lg:col-span-4">
+                        <span class="text-brand-600 font-bold text-xs tracking-widest uppercase mb-4 block">Common Queries</span>
+                        <h2 class="text-4xl md:text-5xl font-serif text-black dark:text-white mb-6 tracking-tight">Details &amp; <br> Clarifications</h2>
+                        <p class="text-neutral-500 dark:text-neutral-400 text-lg leading-relaxed font-light mb-8">Everything you need to know about our packages, billing, and deliverables. Can't find the answer you're looking for?</p>
+                        <a href="#" class="inline-flex items-center gap-2 text-black dark:text-white text-xs font-bold uppercase tracking-widest hover:gap-4 hover:text-brand-600 transition-all">
+                            Contact Support <i data-lucide="arrow-right" class="w-4 h-4" stroke-width="1.5"></i>
+                        </a>
+                    </div>
+
+                    <!-- Right: Accordion -->
+                    <div class="lg:col-span-8 space-y-4">
+                        <!-- Item 1 -->
+                        <div class="group border border-neutral-200 dark:border-white/10 rounded-lg bg-white dark:bg-black overflow-hidden transition-all hover:border-brand-500/30">
+                            <button class="w-full px-6 py-6 flex items-center justify-between text-left focus:outline-none" onclick="toggleFaq(this)">
+                                <span class="text-lg font-medium text-black dark:text-white">How is a Custom Build different from Modular Build?</span>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-neutral-400 transition-transform duration-300 group-[.open]:rotate-180"></i>
+                            </button>
+                            <div class="max-h-0 overflow-hidden transition-all duration-300 ease-out group-[.open]:max-h-40">
+                                <div class="px-6 pb-6 text-neutral-500 dark:text-neutral-400 font-light leading-relaxed">
+                                    A Custom Build is designed and developed specifically for your business, without predefined structures or modules limiting the outcome.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="group border border-neutral-200 dark:border-white/10 rounded-lg bg-white dark:bg-black overflow-hidden transition-all hover:border-brand-500/30">
+                            <button class="w-full px-6 py-6 flex items-center justify-between text-left focus:outline-none" onclick="toggleFaq(this)">
+                                <span class="text-lg font-medium text-black dark:text-white">Will I be involved during the build?</span>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-neutral-400 transition-transform duration-300 group-[.open]:rotate-180"></i>
+                            </button>
+                            <div class="max-h-0 overflow-hidden transition-all duration-300 ease-out group-[.open]:max-h-40">
+                                <div class="px-6 pb-6 text-neutral-500 dark:text-neutral-400 font-light leading-relaxed">
+                                    Yes. You’ll review designs, provide feedback, and approve progress through a structured preview environment — no meetings required.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="group border border-neutral-200 dark:border-white/10 rounded-lg bg-white dark:bg-black overflow-hidden transition-all hover:border-brand-500/30">
+                            <button class="w-full px-6 py-6 flex items-center justify-between text-left focus:outline-none" onclick="toggleFaq(this)">
+                                <span class="text-lg font-medium text-black dark:text-white">How long does a Custom Build take?</span>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-neutral-400 transition-transform duration-300 group-[.open]:rotate-180"></i>
+                            </button>
+                            <div class="max-h-0 overflow-hidden transition-all duration-300 ease-out group-[.open]:max-h-40">
+                                <div class="px-6 pb-6 text-neutral-500 dark:text-neutral-400 font-light leading-relaxed">
+                                    Timelines vary by scope and complexity, but every project follows a defined process with clear milestones and progress visibility.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 4 -->
+                        <div class="group border border-neutral-200 dark:border-white/10 rounded-lg bg-white dark:bg-black overflow-hidden transition-all hover:border-brand-500/30">
+                            <button class="w-full px-6 py-6 flex items-center justify-between text-left focus:outline-none" onclick="toggleFaq(this)">
+                                <span class="text-lg font-medium text-black dark:text-white">Can I make changes before the site goes live?</span>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-neutral-400 transition-transform duration-300 group-[.open]:rotate-180"></i>
+                            </button>
+                            <div class="max-h-0 overflow-hidden transition-all duration-300 ease-out group-[.open]:max-h-40">
+                                <div class="px-6 pb-6 text-neutral-500 dark:text-neutral-400 font-light leading-relaxed">
+                                    Absolutely. You’ll have access to a preview version of the site where refinements can be requested before publishing.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 5 -->
+                        <div class="group border border-neutral-200 dark:border-white/10 rounded-lg bg-white dark:bg-black overflow-hidden transition-all hover:border-brand-500/30">
+                            <button class="w-full px-6 py-6 flex items-center justify-between text-left focus:outline-none" onclick="toggleFaq(this)">
+                                <span class="text-lg font-medium text-black dark:text-white">What happens after the website is launched?</span>
+                                <i data-lucide="chevron-down" class="w-5 h-5 text-neutral-400 transition-transform duration-300 group-[.open]:rotate-180"></i>
+                            </button>
+                            <div class="max-h-0 overflow-hidden transition-all duration-300 ease-out group-[.open]:max-h-40">
+                                <div class="px-6 pb-6 text-neutral-500 dark:text-neutral-400 font-light leading-relaxed">
+                                    Once live, you retain access through the client area for future updates, ongoing management, and optional enhancements.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-black border-t border-neutral-100 dark:border-white/5 py-12 md:py-16 text-xs transition-colors">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+            
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 md:mb-24 gap-8">
+                <!-- Logo Left -->
+                <div class="flex items-center gap-3">
+                    <div class="border border-black dark:border-white p-1 w-9 h-9 flex items-center justify-center">
+                        <span class="font-serif font-bold text-base text-black dark:text-white">KY</span>
+                    </div>
+                    <span class="text-base font-bold tracking-tight text-black dark:text-white uppercase">KLYERA</span>
+                </div>
+
+                <!-- Socials & Location Right -->
+                <div class="flex flex-col items-start md:items-end gap-5">
+                    <div class="flex gap-4 items-center">
+                         <a href="#" class="text-neutral-400 hover:text-blue-600 transition-colors">
+                            <i data-lucide="music-2" class="w-4 h-4" stroke-width="1.5"></i>
+                         </a>
+                         <a href="#" class="text-neutral-400 hover:text-blue-600 transition-colors">
+                             <i data-lucide="instagram" class="w-4 h-4" stroke-width="1.5"></i>
+                         </a>
+                         <a href="#" class="text-neutral-400 hover:text-blue-600 transition-colors">
+                             <i data-lucide="linkedin" class="w-4 h-4" stroke-width="1.5"></i>
+                         </a>
+                    </div>
+                    <div class="flex items-center gap-2 text-neutral-500">
+                        <i data-lucide="map-pin" class="w-3.5 h-3.5" stroke-width="1.5"></i>
+                        <span>Manchester, United Kingdom</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Row -->
+            <div class="flex flex-col md:flex-row justify-between items-center text-neutral-400 border-t border-neutral-100 dark:border-white/5 pt-8 gap-4">
+                <p class="transition-all duration-700 translate-y-10 opacity-0">© 2026 WebSpec Ltd. All rights reserved.</p>
+                <div class="flex gap-8">
+                    <a href="#" class="hover:text-blue-600 transition-colors">Terms &amp; Conditions</a>
+                    <a href="#" class="hover:text-blue-600 transition-colors">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        // Mobile Menu Logic
+        const openMenuBtn = document.getElementById('open-menu');
+        const closeMenuBtn = document.getElementById('close-menu');
+        const menuOverlay = document.getElementById('full-screen-menu');
+        const menuLinks = document.querySelectorAll('.menu-link');
+
+        function toggleMenu() {
+            const isHidden = menuOverlay.classList.contains('pointer-events-none');
+            if (isHidden) {
+                menuOverlay.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                menuOverlay.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        openMenuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+        menuLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            html.classList.add('dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('translate-y-0', 'opacity-100');
+                    entry.target.classList.remove('translate-y-10', 'opacity-0');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('footer p').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Pricing Tab Switching
+        function switchPricing(category) {
+            const tabs = ['landing', 'brochure', 'ecommerce'];
+            const activeClassList = ['bg-white', 'dark:bg-neutral-800', 'text-black', 'dark:text-white', 'border-black/5', 'dark:border-white/5', 'shadow-sm'];
+            const inactiveClassList = ['text-neutral-500', 'dark:text-neutral-400', 'hover:text-black', 'dark:hover:text-white'];
+            
+            tabs.forEach(tab => {
+                const btn = document.getElementById(`tab-${tab}`);
+                const content = document.getElementById(`content-${tab}`);
+                
+                if (tab === category) {
+                    content.classList.remove('hidden');
+                    content.classList.add('grid');
+                    // Reset classes
+                    btn.className = `px-8 py-3 rounded-full text-sm font-medium transition-all border border-transparent ${activeClassList.join(' ')}`;
+                } else {
+                    content.classList.add('hidden');
+                    content.classList.remove('grid');
+                    // Reset classes
+                    btn.className = `px-8 py-3 rounded-full text-sm font-medium transition-all ${inactiveClassList.join(' ')}`;
+                }
+            });
+        }
+
+        // FAQ Toggle Logic
+        function toggleFaq(button) {
+            const parent = button.parentElement;
+            parent.classList.toggle('open');
+        }
+    </script>
+
+</body></html>

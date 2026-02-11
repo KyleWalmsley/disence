@@ -1,0 +1,495 @@
+<html lang="en" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLYERA | Contact</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    letterSpacing: {
+                        tighter: '-0.04em',
+                        tight: '-0.02em',
+                        widest: '0.15em',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { -webkit-font-smoothing: antialiased; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        ::selection { background: rgba(59, 130, 246, 0.3); color: white; }
+        
+        /* Custom Checkbox Style */
+        .custom-checkbox input:checked + div { background-color: #2563eb; border-color: #2563eb; }
+        .custom-checkbox input:checked + div svg { display: block; }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-black text-neutral-900 dark:text-neutral-100 transition-colors duration-700 font-sans selection:bg-brand-500/30">
+
+    <!-- Full Screen Menu Overlay -->
+    <div id="full-screen-menu" class="fixed inset-0 bg-white dark:bg-neutral-950 z-50 flex flex-col justify-center items-center opacity-0 pointer-events-none transition-all duration-500 backdrop-blur-3xl">
+        <button id="close-menu" class="absolute top-6 right-6 md:right-12 w-10 h-10 rounded-full border border-neutral-200 dark:border-white/20 flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-white/10 text-black dark:text-white transition-all hover:text-blue-600 dark:hover:text-blue-600 hover:border-blue-600">
+            <i data-lucide="x" class="w-5 h-5" stroke-width="1.5"></i>
+        </button>
+        
+        <nav class="flex flex-col gap-6 text-center mb-12">
+            <a href="#" class="menu-link text-3xl md:text-5xl font-light text-neutral-400 hover:text-blue-600 transition-colors duration-300">Home</a>
+            <a href="#" class="menu-link text-3xl md:text-5xl font-light text-neutral-400 hover:text-blue-600 transition-colors duration-300">Modular Build Websites</a>
+            <a href="#" class="menu-link text-3xl md:text-5xl font-light text-neutral-400 hover:text-blue-600 transition-colors duration-300">Custom Build Websites</a>
+            <a href="#" class="menu-link text-3xl md:text-5xl font-light text-neutral-400 hover:text-blue-600 transition-colors duration-300">Portfolio</a>
+        </nav>
+
+        <a href="#contact" class="uppercase hover:bg-blue-600 hover:text-white transition-all duration-300 text-xs font-bold text-white tracking-widest bg-brand-500 py-4 px-8 rounded-full menu-link">
+            Request Free Website Assessment
+        </a>
+    </div>
+
+    <!-- Right Navigation -->
+    <div class="fixed -translate-y-1/2 hidden lg:flex flex-col text-white mix-blend-difference z-40 top-1/2 right-6 items-end gap-4 pointer-events-none">
+        <a href="#" class="group flex items-center justify-end pointer-events-auto">
+            <div class="flex items-center gap-0 group-hover:gap-3 rounded-md py-1 pr-1 group-hover:pl-3 group-hover:bg-white/20 group-hover:backdrop-blur-md transition-all duration-500 ease-out border border-transparent group-hover:border-white/20">
+                 <span class="text-xs font-medium text-white max-w-0 group-hover:max-w-[100px] overflow-hidden transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 whitespace-nowrap">Contact</span>
+                 <div class="w-1.5 h-1.5 rounded-full bg-white/50 group-hover:bg-white transition-colors duration-300 shrink-0 mx-1.5"></div>
+            </div>
+        </a>
+        <div class="h-8 w-[1px] bg-white/20 my-1 mr-[6px]"></div>
+        <button id="themeToggle" class="group flex items-center justify-end pointer-events-auto">
+            <div class="flex items-center gap-0 group-hover:gap-3 rounded-md p-1 group-hover:px-2 group-hover:bg-white/20 group-hover:backdrop-blur-md transition-all duration-500 ease-out border border-transparent group-hover:border-white/20">
+                 <span class="text-xs font-medium text-white max-w-0 group-hover:max-w-[100px] overflow-hidden transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 whitespace-nowrap">Toggle Theme</span>
+                 <div class="w-4 h-4 relative">
+                    <i data-lucide="sun" class="w-4 h-4 opacity-0 dark:opacity-100 absolute transition-opacity" stroke-width="1.5"></i>
+                    <i data-lucide="moon" class="w-4 h-4 opacity-100 dark:opacity-0 absolute transition-opacity" stroke-width="1.5"></i>
+                 </div>
+            </div>
+        </button>
+        <a href="#" class="group flex items-center justify-end pointer-events-auto">
+            <div class="flex items-center gap-0 group-hover:gap-3 rounded-md p-1 group-hover:px-2 group-hover:bg-white/20 group-hover:backdrop-blur-md transition-all duration-500 ease-out border border-transparent group-hover:border-white/20">
+                 <span class="text-xs font-medium text-white max-w-0 group-hover:max-w-[150px] overflow-hidden transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 whitespace-nowrap">Modular Design Studio</span>
+                 <div class="w-4 h-4 relative flex items-center justify-center">
+                    <i data-lucide="palette" class="w-4 h-4" stroke-width="1.5"></i>
+                 </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Top Navigation -->
+    <nav class="fixed top-0 w-full z-40 transition-all duration-500 border-b border-white/5 bg-white/80 dark:bg-black/80 backdrop-blur-sm">
+        <div class="w-full px-6 md:px-12 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="#" class="flex items-center gap-3 group transition-all duration-300">
+                    <div class="border border-black/20 dark:border-white/20 group-hover:border-blue-600 p-1 w-9 h-9 flex items-center justify-center transition-colors">
+                        <span class="font-serif font-bold text-base text-black dark:text-white group-hover:text-blue-600 transition-colors">KY</span>
+                    </div>
+                    <span class="text-lg font-bold tracking-tight text-black dark:text-white group-hover:text-blue-600 transition-colors uppercase">KLYERA</span>
+                </a>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#" class="hidden md:flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-black dark:text-white hover:text-blue-600 transition-colors">
+                    <i data-lucide="user" class="w-3.5 h-3.5" stroke-width="1.5"></i> Client Portal
+                </a>
+                <button id="open-menu" class="w-10 h-10 rounded-full border border-black/20 dark:border-white/20 flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-white/10 hover:text-blue-600 dark:hover:text-blue-600 hover:border-blue-600 text-black dark:text-white transition-all">
+                    <i data-lucide="menu" class="w-5 h-5" stroke-width="1.5"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20 min-h-screen">
+        
+        <!-- Header Section -->
+        <section class="relative pt-24 pb-8 px-6 md:px-12">
+            <div class="max-w-4xl mx-auto text-center animate-fade-in">
+                <span class="text-brand-600 font-bold text-xs tracking-widest uppercase mb-4 block">Get In Touch</span>
+                <h1 class="text-4xl md:text-6xl font-medium text-black dark:text-white mb-8 tracking-tighter">
+                    How can we <span class="font-serif italic text-brand-600">help you?</span>
+                </h1>
+                
+                <!-- Tabs -->
+                <div class="inline-flex bg-neutral-100 dark:bg-neutral-900/50 border border-neutral-200 dark:border-white/10 p-1.5 rounded-full relative z-20 shadow-sm">
+                    <button onclick="switchTab('assessment')" id="tab-assessment" class="px-6 md:px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 bg-white dark:bg-neutral-800 text-black dark:text-white shadow-sm border border-neutral-200 dark:border-white/5">
+                        Request Assessment
+                    </button>
+                    <button onclick="switchTab('contact')" id="tab-contact" class="px-6 md:px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white border border-transparent">
+                        Contact Our Team
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- View 1: Website Assessment -->
+        <section id="view-assessment" class="animate-fade-in pb-24 px-6 md:px-12 block">
+            <div class="max-w-[1200px] mx-auto mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+                
+                <!-- Left: 3-Step Process -->
+                <div class="order-2 lg:order-1">
+                    <div class="mb-10">
+                        <h2 class="text-2xl font-medium mb-4 text-black dark:text-white">Our Assessment Process</h2>
+                        <p class="text-neutral-500 dark:text-neutral-400 font-light text-sm leading-relaxed max-w-md">
+                            We provide a comprehensive, FREE, no-obligation audit of your current digital presence. Receive a clear recommendation on how to improve your online presence.
+                        </p>
+                    </div>
+
+                    <div class="relative pl-4 space-y-12 before:absolute before:left-0 before:top-2 before:bottom-2 before:w-[1px] before:bg-gradient-to-b before:from-brand-500 before:to-neutral-200 dark:before:to-neutral-800">
+                        <!-- Step 1 -->
+                        <div class="relative pl-8 group">
+                            <div class="absolute left-[-4px] top-1.5 w-2 h-2 rounded-full bg-brand-500 ring-4 ring-white dark:ring-black"></div>
+                            <h3 class="text-sm font-bold uppercase tracking-widest text-black dark:text-white mb-2 flex items-center gap-2">
+                                <span class="text-brand-600">01.</span> Send Details
+                            </h3>
+                            <p class="text-neutral-500 dark:text-neutral-400 text-sm">Provide your company URL and contact details via the form.</p>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="relative pl-8 group">
+                            <div class="absolute left-[-4px] top-1.5 w-2 h-2 rounded-full bg-neutral-300 dark:bg-neutral-700 ring-4 ring-white dark:ring-black group-hover:bg-brand-500 transition-colors"></div>
+                            <h3 class="text-sm font-bold uppercase tracking-widest text-black dark:text-white mb-2 flex items-center gap-2">
+                                <span class="text-brand-600">02.</span> We Review
+                            </h3>
+                            <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-3">Our team manually inspects your site focusing on:</p>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="bg-neutral-50 dark:bg-white/5 px-3 py-2 rounded text-xs font-medium text-neutral-600 dark:text-neutral-300 flex items-center gap-2 border border-neutral-100 dark:border-white/5">
+                                    <iconify-icon icon="solar:palette-linear"></iconify-icon> Visual Presentation
+                                </div>
+                                <div class="bg-neutral-50 dark:bg-white/5 px-3 py-2 rounded text-xs font-medium text-neutral-600 dark:text-neutral-300 flex items-center gap-2 border border-neutral-100 dark:border-white/5">
+                                    <iconify-icon icon="solar:layers-minimalistic-linear"></iconify-icon> Structure &amp; User Experience
+                                </div>
+                                <div class="bg-neutral-50 dark:bg-white/5 px-3 py-2 rounded text-xs font-medium text-neutral-600 dark:text-neutral-300 flex items-center gap-2 border border-neutral-100 dark:border-white/5">
+                                    <iconify-icon icon="solar:document-text-linear"></iconify-icon> Content &amp; Message
+                                </div>
+                                <div class="bg-neutral-50 dark:bg-white/5 px-3 py-2 rounded text-xs font-medium text-neutral-600 dark:text-neutral-300 flex items-center gap-2 border border-neutral-100 dark:border-white/5">
+                                    <iconify-icon icon="solar:magnifer-linear"></iconify-icon> Search Visibility (SEO Perspective)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="relative pl-8 group">
+                            <div class="absolute left-[-4px] top-1.5 w-2 h-2 rounded-full bg-neutral-300 dark:bg-neutral-700 ring-4 ring-white dark:ring-black group-hover:bg-brand-500 transition-colors"></div>
+                            <h3 class="text-sm font-bold uppercase tracking-widest text-black dark:text-white mb-2 flex items-center gap-2">
+                                <span class="text-brand-600">03.</span> Report &amp; Recommendation
+                            </h3>
+                            <p class="text-neutral-500 dark:text-neutral-400 text-sm mb-4">You receive a PDF report with insights and a Recommendation.</p>
+                            
+                            <div class="bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-500/10 p-4 rounded-lg flex gap-3 items-start">
+                                <iconify-icon icon="solar:info-circle-linear" class="text-brand-600 shrink-0 mt-0.5"></iconify-icon>
+                                <p class="text-[11px] leading-tight text-brand-900 dark:text-brand-100/80 font-medium">
+                                    Integrity Promise: We will only recommend a new website package or service if our data indicates you genuinely need it to achieve your goals.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Assessment Form -->
+                <div class="order-1 lg:order-2 bg-white dark:bg-[#080808] border border-neutral-200 dark:border-white/10 rounded-2xl p-6 md:p-8 shadow-xl shadow-neutral-100 dark:shadow-none">
+                    <div class="mb-8">
+                        <h3 class="text-lg font-medium mb-1">Request Assessment</h3>
+                        <p class="text-neutral-400 text-xs">Enter your details below to start the process.</p>
+                    </div>
+
+                    <form class="space-y-5">
+                        <div class="space-y-1.5">
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 pl-1">Full Name</label>
+                            <input type="text" placeholder="e.g. John Doe" class="w-full bg-neutral-50 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all placeholder:text-neutral-400 text-black dark:text-white">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 pl-1">Company Name</label>
+                            <input type="text" placeholder="e.g. Acme Corp" class="w-full bg-neutral-50 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all placeholder:text-neutral-400 text-black dark:text-white">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 pl-1">Website URL</label>
+                            <div class="relative">
+                                <div class="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none">
+                                    <iconify-icon icon="solar:link-linear" width="16"></iconify-icon>
+                                </div>
+                                <input type="url" placeholder="https://example.com" class="w-full bg-neutral-50 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-lg pl-10 pr-4 py-3 text-sm focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all placeholder:text-neutral-400 text-black dark:text-white">
+                            </div>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 pl-1">Email Address</label>
+                            <input type="email" placeholder="name@company.com" class="w-full bg-neutral-50 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all placeholder:text-neutral-400 text-black dark:text-white">
+                        </div>
+
+                        <div class="pt-2">
+                            <button type="submit" class="w-full bg-black dark:bg-white text-white dark:text-black font-bold uppercase tracking-widest text-xs py-4 rounded-lg hover:bg-brand-600 dark:hover:bg-brand-500 dark:hover:text-white transition-all duration-300 flex items-center justify-center gap-2 group">
+                                Submit Request
+                                <iconify-icon icon="solar:arrow-right-linear" class="group-hover:translate-x-1 transition-transform"></iconify-icon>
+                            </button>
+                            <p class="text-center text-[10px] text-neutral-400 mt-4">We usually respond within 24-48 hours.</p>
+                            <p class="text-center text-[10px] text-neutral-500 dark:text-neutral-500 mt-2 leading-relaxed opacity-70">
+                                Disclaimer: We will only provide assessments if the email address either includes the domain name or is visible on the website that the assessment is for.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- View 2: Contact Team -->
+        <section id="view-contact" class="hidden animate-fade-in pb-24 px-6 md:px-12">
+            <div class="max-w-[1200px] mx-auto mt-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Left: Comprehensive Form -->
+                <div class="lg:col-span-8 bg-white dark:bg-[#080808] border border-neutral-200 dark:border-white/10 rounded-2xl p-6 md:p-10">
+                    <div class="mb-8 border-b border-neutral-100 dark:border-white/5 pb-6">
+                        <h2 class="text-2xl font-medium mb-2 text-black dark:text-white">Send us a message</h2>
+                        <p class="text-neutral-500 dark:text-neutral-400 font-light text-sm">
+                            For general inquiries, partnership opportunities, or billing questions.
+                        </p>
+                    </div>
+
+                    <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-1.5">
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 pl-1">Full Name</label>
+                            <input type="text" class="w-full bg-neutral-50 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-black dark:text-white">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 pl-1">Email Address</label>
+                            <input type="email" class="w-full bg-neutral-50 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-black dark:text-white">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 pl-1">Company Name</label>
+                            <input type="text" class="w-full bg-neutral-50 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-black dark:text-white">
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 pl-1">Company URL</label>
+                            <input type="url" class="w-full bg-neutral-50 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all text-black dark:text-white">
+                        </div>
+
+                        <div class="space-y-1.5 md:col-span-2">
+                            <label class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 pl-1">Message</label>
+                            <textarea rows="5" class="w-full bg-neutral-50 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all resize-none text-black dark:text-white"></textarea>
+                        </div>
+
+                        <div class="md:col-span-2 pt-2">
+                            <button type="submit" class="w-full md:w-auto px-10 bg-black dark:bg-white text-white dark:text-black font-bold uppercase tracking-widest text-xs py-4 rounded-lg hover:bg-brand-600 dark:hover:bg-brand-500 dark:hover:text-white transition-all duration-300 flex items-center justify-center gap-2">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Right: Knowledge Hub Promo -->
+                <div class="lg:col-span-4 flex flex-col gap-6">
+                    <!-- Hub Card -->
+                    <div class="bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-900 dark:to-black border border-neutral-200 dark:border-white/10 rounded-2xl p-6 relative overflow-hidden group">
+                        <!-- Decorative Noise -->
+                        <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-multiply pointer-events-none"></div>
+                        
+                        <div class="relative z-10">
+                            <div class="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-5">
+                                <iconify-icon icon="solar:book-bookmark-linear" width="24"></iconify-icon>
+                            </div>
+                            
+                            <h3 class="text-lg font-bold text-black dark:text-white mb-2">Knowledge Hub</h3>
+                            <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-6 leading-relaxed">
+                                Looking for tutorials on how to edit your website? Find step-by-step guides and documentation instantly.
+                            </p>
+
+                            <!-- Quick Links -->
+                            <div class="space-y-2 mb-6">
+                                <a href="#" class="block bg-white dark:bg-white/5 border border-neutral-100 dark:border-white/5 rounded px-3 py-2.5 text-xs font-medium hover:border-brand-500 dark:hover:border-brand-500 transition-colors flex justify-between items-center group/link">
+                                    <span>Updating Content</span>
+                                    <iconify-icon icon="solar:arrow-right-linear" class="text-neutral-400 group-hover/link:text-brand-500"></iconify-icon>
+                                </a>
+                                <a href="#" class="block bg-white dark:bg-white/5 border border-neutral-100 dark:border-white/5 rounded px-3 py-2.5 text-xs font-medium hover:border-brand-500 dark:hover:border-brand-500 transition-colors flex justify-between items-center group/link">
+                                    <span>Managing Images</span>
+                                    <iconify-icon icon="solar:arrow-right-linear" class="text-neutral-400 group-hover/link:text-brand-500"></iconify-icon>
+                                </a>
+                                <a href="#" class="block bg-white dark:bg-white/5 border border-neutral-100 dark:border-white/5 rounded px-3 py-2.5 text-xs font-medium hover:border-brand-500 dark:hover:border-brand-500 transition-colors flex justify-between items-center group/link">
+                                    <span>SEO Basic Setup</span>
+                                    <iconify-icon icon="solar:arrow-right-linear" class="text-neutral-400 group-hover/link:text-brand-500"></iconify-icon>
+                                </a>
+                            </div>
+
+                            <a href="#" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-600 hover:text-brand-500 transition-colors">
+                                Visit Knowledge Hub <iconify-icon icon="solar:arrow-right-up-linear"></iconify-icon>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Contact Info Card -->
+                    <div class="bg-neutral-50 dark:bg-neutral-900 rounded-xl p-6 border border-neutral-200 dark:border-white/5">
+                        <div class="flex items-center gap-3">
+                            <iconify-icon icon="solar:map-point-linear" class="text-neutral-400"></iconify-icon>
+                            <span class="text-xs font-medium text-neutral-500 dark:text-neutral-400">Manchester, United Kingdom</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-black border-t border-neutral-100 dark:border-white/5 py-12 md:py-16 text-xs transition-colors">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+            
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 md:mb-24 gap-8">
+                <!-- Logo Left -->
+                <div class="flex items-center gap-3">
+                    <div class="border border-black dark:border-white p-1 w-9 h-9 flex items-center justify-center">
+                        <span class="font-serif font-bold text-base text-black dark:text-white">KY</span>
+                    </div>
+                    <span class="text-base font-bold tracking-tight text-black dark:text-white uppercase">KLYERA</span>
+                </div>
+
+                <!-- Socials & Location Right -->
+                <div class="flex flex-col items-start md:items-end gap-5">
+                    <div class="flex gap-4 items-center">
+                         <a href="#" class="text-neutral-400 hover:text-blue-600 transition-colors">
+                            <i data-lucide="music-2" class="w-4 h-4" stroke-width="1.5"></i>
+                         </a>
+                         <a href="#" class="text-neutral-400 hover:text-blue-600 transition-colors">
+                             <i data-lucide="instagram" class="w-4 h-4" stroke-width="1.5"></i>
+                         </a>
+                         <a href="#" class="text-neutral-400 hover:text-blue-600 transition-colors">
+                             <i data-lucide="linkedin" class="w-4 h-4" stroke-width="1.5"></i>
+                         </a>
+                    </div>
+                    <div class="flex items-center gap-2 text-neutral-500">
+                        <i data-lucide="map-pin" class="w-3.5 h-3.5" stroke-width="1.5"></i>
+                        <span>Manchester, United Kingdom</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Row -->
+            <div class="flex flex-col md:flex-row justify-between items-center text-neutral-400 border-t border-neutral-100 dark:border-white/5 pt-8 gap-4">
+                <p class="transition-all duration-700 translate-y-10 opacity-0">© 2026 WebSpec Ltd. All rights reserved.</p>
+                <div class="flex gap-8">
+                    <a href="#" class="hover:text-blue-600 transition-colors">Terms &amp; Conditions</a>
+                    <a href="#" class="hover:text-blue-600 transition-colors">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        // Mobile Menu Logic
+        const openMenuBtn = document.getElementById('open-menu');
+        const closeMenuBtn = document.getElementById('close-menu');
+        const menuOverlay = document.getElementById('full-screen-menu');
+        const menuLinks = document.querySelectorAll('.menu-link');
+
+        function toggleMenu() {
+            const isHidden = menuOverlay.classList.contains('pointer-events-none');
+            if (isHidden) {
+                menuOverlay.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                menuOverlay.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        openMenuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+        menuLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            html.classList.add('dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('translate-y-0', 'opacity-100');
+                    entry.target.classList.remove('translate-y-10', 'opacity-0');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('footer p').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Tab Switching Logic
+        function switchTab(tabName) {
+            const assessmentView = document.getElementById('view-assessment');
+            const contactView = document.getElementById('view-contact');
+            const btnAssessment = document.getElementById('tab-assessment');
+            const btnContact = document.getElementById('tab-contact');
+
+            if (tabName === 'assessment') {
+                // Show Assessment
+                assessmentView.classList.remove('hidden');
+                assessmentView.classList.add('block');
+                contactView.classList.add('hidden');
+                contactView.classList.remove('block');
+
+                // Update Buttons
+                btnAssessment.className = "px-6 md:px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 bg-white dark:bg-neutral-800 text-black dark:text-white shadow-sm border border-neutral-200 dark:border-white/5";
+                btnContact.className = "px-6 md:px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white border border-transparent";
+            } else {
+                // Show Contact
+                contactView.classList.remove('hidden');
+                contactView.classList.add('block');
+                assessmentView.classList.add('hidden');
+                assessmentView.classList.remove('block');
+
+                // Update Buttons
+                btnContact.className = "px-6 md:px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 bg-white dark:bg-neutral-800 text-black dark:text-white shadow-sm border border-neutral-200 dark:border-white/5";
+                btnAssessment.className = "px-6 md:px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white border border-transparent";
+            }
+        }
+    </script>
+
+
+</body></html>

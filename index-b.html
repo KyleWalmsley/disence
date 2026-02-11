@@ -1,0 +1,595 @@
+<html lang="en" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLYERA | Digital Experience Design</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    letterSpacing: {
+                        tighter: '-0.04em',
+                        tight: '-0.02em',
+                        widest: '0.15em',
+                    },
+                    backgroundImage: {
+                        'noise': "url('https://grainy-gradients.vercel.app/noise.svg')",
+                    },
+                    animation: {
+                        'slow-pan': 'pan 30s linear infinite alternate',
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'blob': 'blob 10s infinite',
+                        'grid-flow': 'gridFlow 20s linear infinite',
+                    },
+                    keyframes: {
+                        pan: {
+                            '0%': { transform: 'scale(1)' },
+                            '100%': { transform: 'scale(1.1)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        gridFlow: {
+                            '0%': { transform: 'translateY(0)' },
+                            '100%': { transform: 'translateY(40px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { -webkit-font-smoothing: antialiased; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        ::selection { background: rgba(59, 130, 246, 0.3); color: white; }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-black text-neutral-900 dark:text-neutral-100 transition-colors duration-700 font-sans selection:bg-brand-500/30">
+
+    <!-- Full Screen Menu Overlay -->
+    <div id="full-screen-menu" class="fixed inset-0 bg-white dark:bg-neutral-950 z-50 flex flex-col justify-center items-center opacity-0 pointer-events-none transition-all duration-500 backdrop-blur-3xl">
+        <button id="close-menu" class="absolute top-6 right-6 md:right-12 w-10 h-10 rounded-full border border-neutral-200 dark:border-white/20 flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-white/10 text-black dark:text-white transition-all hover:text-blue-600 dark:hover:text-blue-600 hover:border-blue-600">
+            <i data-lucide="x" class="w-5 h-5" stroke-width="1.5"></i>
+        </button>
+        
+        <nav class="flex flex-col gap-8 text-center mb-12">
+            <a href="#hero" class="menu-link text-4xl md:text-5xl font-light text-neutral-400 hover:text-blue-600 transition-colors duration-300">Home</a>
+            <a href="#products" class="menu-link text-4xl md:text-5xl font-light text-neutral-400 hover:text-blue-600 transition-colors duration-300">Modular Builds</a>
+            <a href="#products" class="menu-link text-4xl md:text-5xl font-light text-neutral-400 hover:text-blue-600 transition-colors duration-300">Custom Builds</a>
+            <a href="#process" class="menu-link text-4xl md:text-5xl font-light text-neutral-400 hover:text-blue-600 transition-colors duration-300">Portfolio</a>
+        </nav>
+
+        <a href="#products" class="uppercase hover:bg-blue-600 hover:text-white transition-all duration-300 text-xs font-bold text-white tracking-widest bg-brand-500 py-4 px-8 rounded-full menu-link">
+            Request Free Website Assessment
+        </a>
+    </div>
+
+    <!-- Right Navigation with Expanding Interaction -->
+    <div class="fixed -translate-y-1/2 hidden lg:flex flex-col text-neutral-900 dark:text-white mix-blend-difference z-40 top-1/2 right-6 items-end gap-4 pointer-events-none">
+        
+        <a href="#hero" class="group flex items-center justify-end pointer-events-auto">
+            <div class="flex items-center gap-0 group-hover:gap-3 rounded-md py-1 pr-1 group-hover:pl-3 group-hover:bg-neutral-900/10 dark:group-hover:bg-white/20 group-hover:backdrop-blur-md transition-all duration-500 ease-out border border-transparent group-hover:border-neutral-900/10 dark:group-hover:border-white/20">
+                 <span class="text-xs font-medium text-neutral-900 dark:text-white max-w-0 group-hover:max-w-[100px] overflow-hidden transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 whitespace-nowrap">Home</span>
+                 <div class="w-1.5 h-1.5 rounded-full bg-neutral-900/50 dark:bg-white/50 group-hover:bg-neutral-900 dark:group-hover:bg-white transition-colors duration-300 shrink-0 mx-1.5"></div>
+            </div>
+        </a>
+
+        <a href="#products" class="group flex items-center justify-end pointer-events-auto">
+            <div class="flex items-center gap-0 group-hover:gap-3 rounded-md py-1 pr-1 group-hover:pl-3 group-hover:bg-neutral-900/10 dark:group-hover:bg-white/20 group-hover:backdrop-blur-md transition-all duration-500 ease-out border border-transparent group-hover:border-neutral-900/10 dark:group-hover:border-white/20">
+                 <span class="text-xs font-medium text-neutral-900 dark:text-white max-w-0 group-hover:max-w-[100px] overflow-hidden transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 whitespace-nowrap">Builds</span>
+                 <div class="w-1.5 h-1.5 rounded-full bg-neutral-900/50 dark:bg-white/50 group-hover:bg-neutral-900 dark:group-hover:bg-white transition-colors duration-300 shrink-0 mx-1.5"></div>
+            </div>
+        </a>
+
+        <a href="#process" class="group flex items-center justify-end pointer-events-auto">
+            <div class="flex items-center gap-0 group-hover:gap-3 rounded-md py-1 pr-1 group-hover:pl-3 group-hover:bg-neutral-900/10 dark:group-hover:bg-white/20 group-hover:backdrop-blur-md transition-all duration-500 ease-out border border-transparent group-hover:border-neutral-900/10 dark:group-hover:border-white/20">
+                 <span class="text-xs font-medium text-neutral-900 dark:text-white max-w-0 group-hover:max-w-[100px] overflow-hidden transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 whitespace-nowrap">Process</span>
+                 <div class="w-1.5 h-1.5 rounded-full bg-neutral-900/50 dark:bg-white/50 group-hover:bg-neutral-900 dark:group-hover:bg-white transition-colors duration-300 shrink-0 mx-1.5"></div>
+            </div>
+        </a>
+
+        <a href="#responsive" class="group flex items-center justify-end pointer-events-auto">
+            <div class="flex items-center gap-0 group-hover:gap-3 rounded-md py-1 pr-1 group-hover:pl-3 group-hover:bg-neutral-900/10 dark:group-hover:bg-white/20 group-hover:backdrop-blur-md transition-all duration-500 ease-out border border-transparent group-hover:border-neutral-900/10 dark:group-hover:border-white/20">
+                 <span class="text-xs font-medium text-neutral-900 dark:text-white max-w-0 group-hover:max-w-[100px] overflow-hidden transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 whitespace-nowrap">Responsive</span>
+                 <div class="w-1.5 h-1.5 rounded-full bg-neutral-900/50 dark:bg-white/50 group-hover:bg-neutral-900 dark:group-hover:bg-white transition-colors duration-300 shrink-0 mx-1.5"></div>
+            </div>
+        </a>
+
+        <div class="h-8 w-[1px] bg-neutral-900/20 dark:bg-white/20 my-1 mr-[6px]"></div>
+        
+        <button id="themeToggle" class="group flex items-center justify-end pointer-events-auto">
+            <div class="flex items-center gap-0 group-hover:gap-3 rounded-md p-1 group-hover:px-2 group-hover:bg-neutral-900/10 dark:group-hover:bg-white/20 group-hover:backdrop-blur-md transition-all duration-500 ease-out border border-transparent group-hover:border-neutral-900/10 dark:group-hover:border-white/20">
+                 <span class="text-xs font-medium text-neutral-900 dark:text-white max-w-0 group-hover:max-w-[100px] overflow-hidden transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 whitespace-nowrap">Toggle Theme</span>
+                 <div class="w-4 h-4 relative">
+                    <i data-lucide="sun" class="w-4 h-4 opacity-0 dark:opacity-100 absolute transition-opacity text-neutral-900 dark:text-white" stroke-width="1.5"></i>
+                    <i data-lucide="moon" class="w-4 h-4 opacity-100 dark:opacity-0 absolute transition-opacity text-neutral-900 dark:text-white" stroke-width="1.5"></i>
+                 </div>
+            </div>
+        </button>
+
+        <a href="#" class="group flex items-center justify-end pointer-events-auto">
+            <div class="flex items-center gap-0 group-hover:gap-3 rounded-md p-1 group-hover:px-2 group-hover:bg-neutral-900/10 dark:group-hover:bg-white/20 group-hover:backdrop-blur-md transition-all duration-500 ease-out border border-transparent group-hover:border-neutral-900/10 dark:group-hover:border-white/20">
+                 <span class="text-xs font-medium text-neutral-900 dark:text-white max-w-0 group-hover:max-w-[150px] overflow-hidden transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 whitespace-nowrap">Modular Design Studio</span>
+                 <div class="w-4 h-4 relative flex items-center justify-center">
+                    <i data-lucide="palette" class="w-4 h-4 text-neutral-900 dark:text-white" stroke-width="1.5"></i>
+                 </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Top Navigation -->
+    <nav class="fixed top-0 w-full z-40 transition-all duration-500 border-b border-neutral-200 dark:border-white/5 bg-white/70 dark:bg-black/20 backdrop-blur-md">
+        <div class="w-full px-6 md:px-12 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="#" class="flex items-center gap-3 group transition-all duration-300">
+                    <div class="border border-neutral-900/20 dark:border-white/20 group-hover:border-blue-600 p-1 w-9 h-9 flex items-center justify-center transition-colors">
+                        <span class="font-serif font-bold text-base text-neutral-900 dark:text-white group-hover:text-blue-600 transition-colors">KY</span>
+                    </div>
+                    <span class="text-lg font-bold tracking-tight text-neutral-900 dark:text-white group-hover:text-blue-600 transition-colors uppercase">KLYERA</span>
+                </a>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#" class="hidden md:flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-neutral-600 dark:text-white hover:text-blue-600 transition-colors">
+                    <i data-lucide="user" class="w-3.5 h-3.5" stroke-width="1.5"></i> Client Portal
+                </a>
+                <button id="open-menu" class="w-10 h-10 rounded-full border border-neutral-900/10 dark:border-white/20 flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-white hover:text-blue-600 dark:hover:text-blue-600 hover:border-blue-600 text-neutral-900 dark:text-white transition-all">
+                    <i data-lucide="menu" class="w-5 h-5" stroke-width="1.5"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="">
+        <!-- Hero Section - Completely Redesigned Background -->
+        <section id="hero" class="relative h-screen w-full overflow-hidden flex flex-col justify-end pb-24 group transition-all duration-700 translate-y-0 opacity-100">
+            
+            <!-- Complex Animated Background -->
+            <div class="absolute inset-0 z-0 w-full h-full bg-neutral-50 dark:bg-[#050505] transition-colors duration-700 overflow-hidden">
+                
+                <!-- Base Gradients (Thematic) -->
+                <div class="absolute top-0 inset-x-0 h-[800px] w-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-200/40 via-neutral-100/10 to-transparent dark:from-brand-900/20 dark:via-neutral-900/10 dark:to-transparent opacity-100"></div>
+
+                <!-- Animated Blobs / Orbs -->
+                <div class="absolute top-[-20%] left-[20%] w-[600px] h-[600px] bg-purple-300/30 dark:bg-indigo-600/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob"></div>
+                <div class="absolute top-[-10%] right-[10%] w-[500px] h-[500px] bg-blue-300/30 dark:bg-brand-600/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-2000"></div>
+                <div class="absolute bottom-[-20%] left-[-10%] w-[700px] h-[700px] bg-pink-300/30 dark:bg-purple-900/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-4000"></div>
+
+                <!-- Perspective Grid -->
+                <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_40%,#000_50%,transparent_100%)] opacity-70 dark:opacity-30"></div>
+
+                <!-- Technical Accent Lines -->
+                <div class="absolute inset-0 pointer-events-none">
+                    <!-- Vertical Scanning Line -->
+                    <div class="absolute left-1/4 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-neutral-400/20 dark:via-white/10 to-transparent"></div>
+                    <div class="absolute right-1/3 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-neutral-400/20 dark:via-white/5 to-transparent border-r border-dashed border-neutral-300/30 dark:border-white/5"></div>
+                    
+                    <!-- Horizontal Glowing Line -->
+                    <div class="absolute top-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-500/20 to-transparent"></div>
+                </div>
+
+                <!-- Noise Texture -->
+                <div class="absolute inset-0 opacity-[0.04] dark:opacity-[0.07] bg-noise mix-blend-overlay"></div>
+                
+                <!-- Bottom Fade -->
+                <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white dark:from-black to-transparent"></div>
+            </div>
+
+            <div class="md:px-12 w-full max-w-[1800px] z-10 mr-auto ml-auto pr-6 pl-6 relative">
+                <div class="max-w-4xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-200 dark:border-white/20 bg-white/50 dark:bg-white/5 backdrop-blur-md mb-8 animate-fade-in shadow-sm">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse"></span>
+                        <span class="text-[10px] uppercase tracking-widest font-semibold text-neutral-600 dark:text-white/90">Accepting New Clients</span>
+                    </div>
+                    <h1 class="md:text-8xl lg:text-9xl leading-[0.9] text-6xl font-medium text-neutral-900 dark:text-white tracking-tighter mb-8">Define Your  <br> <span class="italic text-neutral-500 dark:text-white/80 font-serif">Digital Presence</span></h1>
+                    <p class="md:text-xl leading-relaxed transition-all duration-700 text-lg font-light text-neutral-600 dark:text-white/70 opacity-100 max-w-xl mb-10 translate-y-0">Turn intent into execution. Explore a curated set of proven website frameworks engineered for performance, flexibility, and long-term growth.</p>
+                    
+                    <div class="flex items-center gap-4">
+                        <a href="#products" class="uppercase hover:bg-blue-600 hover:text-white transition-all duration-300 text-xs font-bold text-white dark:text-black tracking-widest bg-black dark:bg-white pt-5 pr-10 pb-5 pl-10">Request Free Website Assessment</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Showcase Section -->
+        <section class="md:py-24 bg-white dark:bg-black border-neutral-200 dark:border-white/5 border-b pt-16 pb-16 transition-colors duration-700" id="products">
+            <div class="px-6 md:px-12 max-w-[1800px] mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                    <div class="">
+                        <span class="text-brand-500 text-xs font-bold tracking-widest uppercase mb-2 block">Our Expertise</span>
+                        <h2 class="md:text-5xl transition-all duration-700 text-4xl font-medium text-black dark:text-white tracking-tighter translate-y-10 opacity-0">Choose Your Build</h2>
+                    </div>
+                    <p class="md:text-base leading-relaxed transition-all duration-700 text-sm text-neutral-500 max-w-md translate-y-10 opacity-0">Select the development path that aligns with your operational scale.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Product 1: Modular Builds -->
+                    <div class="group relative h-[450px] md:h-[525px] bg-white dark:bg-black border border-neutral-200 dark:border-white/10 overflow-hidden rounded-sm cursor-pointer transition-all duration-700 translate-y-10 opacity-0 hover:border-brand-500/50">
+                        
+                        <div class="absolute top-8 right-8 z-20">
+                            <span class="inline-block bg-brand-500 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-lg shadow-brand-500/20">Coming Soon</span>
+                        </div>
+
+                        <div class="absolute top-8 left-8">
+                            <div class="w-12 h-12 border border-neutral-200 dark:border-white/20 rounded-full flex items-center justify-center mb-4 bg-transparent backdrop-blur-sm">
+                                <i data-lucide="blocks" class="w-5 h-5 text-black dark:text-white" stroke-width="1.5"></i>
+                            </div>
+                        </div>
+
+                        <div class="absolute bottom-0 left-0 w-full p-8 md:p-12">
+                            <h3 class="md:text-5xl text-3xl text-black dark:text-white tracking-tight mb-4">Modular Builds</h3>
+                            <p class="md:text-base line-clamp-3 transition-colors transition-all duration-700 text-sm text-neutral-500 dark:text-neutral-400 max-w-sm mb-8 translate-y-10 opacity-0">Instant deployment without compromise. Build a unique website by configuring expertly designed components and layouts.</p>
+                            <ul class="space-y-3 mb-8 border-l border-neutral-200 dark:border-white/20 pl-6">
+                                <li class="text-neutral-600 dark:text-white/70 text-sm flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500" stroke-width="1.5"></i> Motion-rich interactions</li>
+                                <li class="text-neutral-600 dark:text-white/70 text-sm flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500" stroke-width="1.5"></i> SEO Optimized Architecture</li>
+                                <li class="text-neutral-600 dark:text-white/70 text-sm flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500" stroke-width="1.5"></i> CMS Integration</li>
+                            </ul>
+                            <!-- Updated CTA -->
+                            <div class="flex items-center gap-2 text-black dark:text-white text-xs font-bold uppercase tracking-widest group-hover:gap-4 group-hover:text-blue-600 transition-all">
+                                Register Interest <i data-lucide="arrow-right" class="w-4 h-4" stroke-width="1.5"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 2: Custom Builds -->
+                    <div class="group relative h-[450px] md:h-[525px] bg-white dark:bg-black border border-neutral-200 dark:border-white/10 overflow-hidden rounded-sm cursor-pointer transition-all duration-700 translate-y-10 opacity-0 hover:border-brand-500/50">
+
+                        <div class="absolute top-8 left-8">
+                            <div class="w-12 h-12 border border-neutral-200 dark:border-white/20 rounded-full flex items-center justify-center mb-4 bg-transparent backdrop-blur-sm">
+                                <i data-lucide="pencil-ruler" class="w-5 h-5 text-black dark:text-white" stroke-width="1.5"></i>
+                            </div>
+                        </div>
+
+                        <div class="absolute bottom-0 left-0 w-full p-8 md:p-12">
+                            <h3 class="md:text-5xl text-3xl text-black dark:text-white tracking-tight mb-4">Custom Builds</h3>
+                            <p class="md:text-base line-clamp-3 transition-colors transition-all duration-700 text-sm text-neutral-500 dark:text-neutral-400 max-w-sm mb-8 translate-y-10 opacity-0">Tailored from the ground up. We design and develop a fully bespoke digital environment, aligned precisely with your business goals.</p>
+                            <ul class="space-y-3 mb-8 border-l border-neutral-200 dark:border-white/20 pl-6">
+                                <li class="text-neutral-600 dark:text-white/70 text-sm flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500" stroke-width="1.5"></i> Sub-second Load Times</li>
+                                <li class="text-neutral-600 dark:text-white/70 text-sm flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500" stroke-width="1.5"></i> Dynamic Inventory Sync</li>
+                                <li class="text-neutral-600 dark:text-white/70 text-sm flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-brand-500" stroke-width="1.5"></i> Conversion Rate Optimized</li>
+                            </ul>
+                            <!-- Updated CTA -->
+                            <div class="flex items-center gap-2 text-black dark:text-white text-xs font-bold uppercase tracking-widest group-hover:gap-4 group-hover:text-blue-600 transition-all">
+                                View Packages <i data-lucide="arrow-right" class="w-4 h-4" stroke-width="1.5"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section - Redesigned -->
+        <section id="process" class="py-24 md:py-32 bg-white dark:bg-black transition-colors relative overflow-hidden">
+             <!-- Background aesthetic lines -->
+            <div class="absolute inset-0 pointer-events-none">
+                <div class="absolute left-12 top-0 bottom-0 w-px bg-neutral-100 dark:bg-white/5 hidden md:block"></div>
+                <div class="absolute right-12 top-0 bottom-0 w-px bg-neutral-100 dark:bg-white/5 hidden md:block"></div>
+            </div>
+
+            <div class="px-6 md:px-12 max-w-[1600px] mx-auto relative z-10">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                    
+                    <!-- Left Column: Title and Toggles -->
+                    <div class="lg:col-span-4 flex flex-col items-start justify-center transition-all duration-700 translate-y-10 opacity-0 group">
+                        <span class="text-brand-600 font-bold text-xs tracking-widest uppercase mb-4 block">The Methodology</span>
+                        <h2 class="text-5xl md:text-6xl font-serif text-black dark:text-white mb-6 tracking-tight leading-[0.9]">Process <br> Timeline</h2>
+                        <p class="text-neutral-500 dark:text-neutral-400 mb-10 text-lg leading-relaxed font-light">A structured approach to digital creation, ensuring transparency and precision at every milestone.</p>
+                        
+                        <!-- Redesigned Toggle Switch -->
+                        <div class="bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-white/5 p-1 rounded-lg inline-flex relative">
+                             <button onclick="switchTab('modular')" id="tab-modular" class="px-6 py-2 rounded-md text-sm font-medium transition-all shadow-sm bg-white dark:bg-neutral-800 text-black dark:text-white">Modular</button>
+                             <button onclick="switchTab('custom')" id="tab-custom" class="px-6 py-2 rounded-md text-sm font-medium transition-all text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white">Custom</button>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Grid of Steps -->
+                    <div class="lg:col-span-8 relative">
+                        <!-- Modular Content -->
+                        <div id="content-modular" class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20">
+                            
+                            <div class="relative group transition-all duration-700 translate-y-10 opacity-0 delay-100">
+                                <span class="absolute -top-10 -left-6 text-9xl font-bold text-neutral-100 dark:text-neutral-800/50 -z-10 select-none transition-colors">01</span>
+                                <h3 class="text-xl font-medium text-black dark:text-white mb-3 tracking-tight">Submit Specifications</h3>
+                                <p class="text-neutral-500 dark:text-neutral-400 text-sm leading-relaxed font-light">Complete a guided specification form. Either choose a preset or create your own structure and provide information to define your site.</p>
+                            </div>
+
+                            <div class="relative group transition-all duration-700 translate-y-10 opacity-0 delay-200">
+                                <span class="absolute -top-10 -left-6 text-9xl font-bold text-neutral-100 dark:text-neutral-800/50 -z-10 select-none transition-colors">02</span>
+                                <h3 class="text-xl font-medium text-black dark:text-white mb-3 tracking-tight">Build by Modules</h3>
+                                <p class="text-neutral-500 dark:text-neutral-400 text-sm leading-relaxed font-light">We assemble your website using modular components, configured precisely to your specifications, structure, and selected functionality.</p>
+                            </div>
+
+                            <div class="relative group transition-all duration-700 translate-y-10 opacity-0 delay-300">
+                                <span class="absolute -top-10 -left-6 text-9xl font-bold text-neutral-100 dark:text-neutral-800/50 -z-10 select-none transition-colors">03</span>
+                                <h3 class="text-xl font-medium text-black dark:text-white mb-3 tracking-tight">Review &amp; Adjust</h3>
+                                <p class="text-neutral-500 dark:text-neutral-400 text-sm leading-relaxed font-light">Access your website in preview mode to review the build, request refinements, and confirm final adjustments before publishing live.</p>
+                            </div>
+
+                            <div class="relative group transition-all duration-700 translate-y-10 opacity-0 delay-400">
+                                <span class="absolute -top-10 -left-6 text-9xl font-bold text-neutral-100 dark:text-neutral-800/50 -z-10 select-none transition-colors">04</span>
+                                <h3 class="text-xl font-medium text-black dark:text-white mb-3 tracking-tight">Publish Live</h3>
+                                <p class="text-neutral-500 dark:text-neutral-400 text-sm leading-relaxed font-light">When ready, toggle your website live to make it publicly accessible while retaining full access for future updates and management.</p>
+                            </div>
+                        </div>
+
+                        <!-- Custom Content (Hidden by default) -->
+                        <div id="content-custom" class="hidden grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20">
+                            
+                            <div class="relative group">
+                                <span class="absolute -top-10 -left-6 text-9xl font-bold text-neutral-100 dark:text-neutral-800/50 -z-10 select-none transition-colors">01</span>
+                                <h3 class="text-xl font-medium text-black dark:text-white mb-3 tracking-tight">Discovery Phase</h3>
+                                <p class="text-neutral-500 dark:text-neutral-400 text-sm leading-relaxed font-light">Deep dive into your business logic, user personas, and technical requirements to map out a comprehensive strategy.</p>
+                            </div>
+
+                            <div class="relative group">
+                                <span class="absolute -top-10 -left-6 text-9xl font-bold text-neutral-100 dark:text-neutral-800/50 -z-10 select-none transition-colors">02</span>
+                                <h3 class="text-xl font-medium text-black dark:text-white mb-3 tracking-tight">Design &amp; Prototype</h3>
+                                <p class="text-neutral-500 dark:text-neutral-400 text-sm leading-relaxed font-light">High-fidelity prototyping and interactive wireframes that define the user journey before a single line of code is written.</p>
+                            </div>
+
+                            <div class="relative group">
+                                <span class="absolute -top-10 -left-6 text-9xl font-bold text-neutral-100 dark:text-neutral-800/50 -z-10 select-none transition-colors">03</span>
+                                <h3 class="text-xl font-medium text-black dark:text-white mb-3 tracking-tight">Bespoke Engineering</h3>
+                                <p class="text-neutral-500 dark:text-neutral-400 text-sm leading-relaxed font-light">Custom development using modern frameworks. No bloat, just clean, efficient code tailored to your exact needs.</p>
+                            </div>
+
+                            <div class="relative group">
+                                <span class="absolute -top-10 -left-6 text-9xl font-bold text-neutral-100 dark:text-neutral-800/50 -z-10 select-none transition-colors">04</span>
+                                <h3 class="text-xl font-medium text-black dark:text-white mb-3 tracking-tight">Scale &amp; Optimize</h3>
+                                <p class="text-neutral-500 dark:text-neutral-400 text-sm leading-relaxed font-light">Post-launch optimization, A/B testing, and feature expansion to ensure your platform grows with your business.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Responsiveness Section -->
+        <section id="responsive" class="py-24 bg-neutral-50 dark:bg-[#050505] border-t border-black/5 dark:border-white/5 relative overflow-hidden">
+             <div class="px-6 md:px-12 max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                
+                <div class="lg:col-span-4 space-y-8">
+                     <div class="w-12 h-12 bg-white dark:bg-white/5 rounded-full flex items-center justify-center border border-black/10 dark:border-white/10">
+                         <i data-lucide="monitor-smartphone" class="w-5 h-5 text-black dark:text-white" stroke-width="1.5"></i>
+                     </div>
+                     <h2 class="text-4xl md:text-5xl font-medium tracking-tighter text-black dark:text-white transition-all duration-700 translate-y-10 opacity-0">
+                         Fluid <br> Dynamics.
+                     </h2>
+                     <p class="leading-relaxed transition-all duration-700 font-light text-neutral-500 translate-y-10 opacity-0">Your customers are everywhere. Our websites adapt instantly. Whether it's a 27-inch monitor, laptop, or a mobile device. We ensure pixel-perfect readability and touch-optimised navigation.</p>
+                     
+                     <div class="flex flex-col gap-4 border-l-2 border-brand-500 pl-6">
+                         <div class="flex items-center gap-4">
+                             <span class="text-2xl font-bold text-black dark:text-white">100%</span>
+                             <span class="text-sm text-neutral-500">Mobile Responsive</span>
+                         </div>
+                         <div class="flex items-center gap-4">
+                             <span class="text-2xl font-bold text-black dark:text-white">4K</span>
+                             <span class="text-sm text-neutral-500">Retina Ready Assets</span>
+                         </div>
+                     </div>
+                </div>
+
+                <!-- Visual Representation of Responsiveness -->
+                <div class="lg:col-span-8 relative">
+                    <div class="relative flex items-end justify-center gap-4 lg:gap-8 transform lg:translate-x-12">
+                        
+                        <!-- Desktop -->
+                        <div class="hidden md:block w-[400px] lg:w-[500px] bg-white dark:bg-black rounded-t-xl border-t-[12px] border-x-[12px] border-black dark:border-neutral-800 shadow-2xl relative z-10 aspect-video overflow-hidden">
+                            <div class="w-full h-6 bg-neutral-100 dark:bg-neutral-900 border-b border-black/5 dark:border-white/5 flex items-center gap-1 px-2">
+                                <div class="w-2 h-2 rounded-full bg-red-400"></div>
+                                <div class="w-2 h-2 rounded-full bg-yellow-400"></div>
+                                <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                            </div>
+                            <!-- No Image -->
+                        </div>
+
+                        <!-- Tablet -->
+                        <div class="w-[200px] md:w-[260px] bg-white dark:bg-black rounded-xl border-[10px] border-black dark:border-neutral-800 shadow-2xl relative z-20 aspect-[3/4] overflow-hidden -ml-12 md:-ml-24 mb-8">
+                             <!-- No Image -->
+                             <div class="absolute inset-0 bg-black/10 pointer-events-none"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About The Company -->
+        <section class="overflow-hidden bg-white dark:bg-black pt-32 pb-32 relative">
+            <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-brand-900/5 dark:bg-brand-900/10 blur-[120px] rounded-full"></div>
+            
+            <div class="max-w-[1000px] mx-auto px-6 relative z-10 text-center">
+                <div class="inline-block mb-8">
+                    <div class="w-px h-16 bg-gradient-to-b from-transparent via-brand-500 to-transparent mx-auto"></div>
+                </div>
+                
+                <h2 class="text-3xl md:text-5xl font-serif text-black dark:text-white mb-8 italic transition-all duration-700 translate-y-10 opacity-0">
+                    "We don't just build websites.<br>We engineer digital legacies."
+                </h2>
+                
+                <div class="text-neutral-500 dark:text-neutral-400 max-w-2xl mx-auto space-y-6 text-lg font-light leading-relaxed">
+                    <p class="transition-all duration-700 translate-y-10 opacity-0">Providing websites through structured systems and intentional design, removing friction from the process without sacrificing quality. Instead of open-ended projects or rigid templates, we combine proven components, clear specifications, and thoughtful execution to deliver websites that are both flexible and reliable.</p>
+                </div>
+
+                <div class="mt-12 flex justify-center gap-12 border-t border-neutral-200 dark:border-white/5 pt-12">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-black dark:text-white mb-1">99%</div>
+                        <div class="uppercase text-xs text-neutral-500 tracking-widest">Uptime</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-black dark:text-white mb-1">Yes</div>
+                        <div class="uppercase text-xs text-neutral-500 tracking-widest">Constant Updates</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-black dark:text-white mb-1">24/7</div>
+                        <div class="text-xs uppercase tracking-widest text-neutral-500">Client Support</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-black border-t border-neutral-100 dark:border-white/5 py-12 md:py-16 text-xs transition-colors">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+            
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 md:mb-24 gap-8">
+                <!-- Logo Left -->
+                <div class="flex items-center gap-3">
+                    <div class="border border-black dark:border-white p-1 w-9 h-9 flex items-center justify-center">
+                        <span class="font-serif font-bold text-base text-black dark:text-white">KY</span>
+                    </div>
+                    <span class="text-base font-bold tracking-tight text-black dark:text-white uppercase">KLYERA</span>
+                </div>
+
+                <!-- Socials & Location Right -->
+                <div class="flex flex-col items-start md:items-end gap-5">
+                    <div class="flex gap-4 items-center">
+                         <a href="#" class="text-neutral-400 hover:text-blue-600 transition-colors">
+                            <i data-lucide="music-2" class="w-4 h-4" stroke-width="1.5"></i>
+                         </a>
+                         <a href="#" class="text-neutral-400 hover:text-blue-600 transition-colors">
+                             <i data-lucide="instagram" class="w-4 h-4" stroke-width="1.5"></i>
+                         </a>
+                         <a href="#" class="text-neutral-400 hover:text-blue-600 transition-colors">
+                             <i data-lucide="linkedin" class="w-4 h-4" stroke-width="1.5"></i>
+                         </a>
+                    </div>
+                    <div class="flex items-center gap-2 text-neutral-500">
+                        <i data-lucide="map-pin" class="w-3.5 h-3.5" stroke-width="1.5"></i>
+                        <span>Manchester, United Kingdom</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Row -->
+            <div class="flex flex-col md:flex-row justify-between items-center text-neutral-400 border-t border-neutral-100 dark:border-white/5 pt-8 gap-4">
+                <p class="transition-all duration-700 translate-y-10 opacity-0">© 2026 WebSpec Ltd. All rights reserved.</p>
+                <div class="flex gap-8">
+                    <a href="#" class="hover:text-blue-600 transition-colors">Terms &amp; Conditions</a>
+                    <a href="#" class="hover:text-blue-600 transition-colors">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        // Mobile Menu Logic
+        const openMenuBtn = document.getElementById('open-menu');
+        const closeMenuBtn = document.getElementById('close-menu');
+        const menuOverlay = document.getElementById('full-screen-menu');
+        const menuLinks = document.querySelectorAll('.menu-link');
+
+        function toggleMenu() {
+            const isHidden = menuOverlay.classList.contains('pointer-events-none');
+            if (isHidden) {
+                menuOverlay.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                menuOverlay.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        openMenuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+        menuLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            html.classList.add('dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('translate-y-0', 'opacity-100');
+                    entry.target.classList.remove('translate-y-10', 'opacity-0');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('h2, p, .group').forEach(el => {
+            el.classList.add('transition-all', 'duration-700', 'translate-y-10', 'opacity-0');
+            observer.observe(el);
+        });
+
+        // Tab Switching Logic
+        function switchTab(tabName) {
+            const modularContent = document.getElementById('content-modular');
+            const customContent = document.getElementById('content-custom');
+            const modularTab = document.getElementById('tab-modular');
+            const customTab = document.getElementById('tab-custom');
+
+            const activeClasses = ['bg-white', 'dark:bg-neutral-800', 'shadow-sm', 'text-black', 'dark:text-white'];
+            const inactiveClasses = ['text-neutral-500', 'dark:text-neutral-400', 'hover:text-black', 'dark:hover:text-white'];
+
+            if (tabName === 'modular') {
+                modularContent.style.display = 'grid';
+                modularContent.classList.remove('hidden');
+                customContent.style.display = 'none';
+                customContent.classList.add('hidden');
+                
+                modularTab.classList.add(...activeClasses);
+                modularTab.classList.remove(...inactiveClasses);
+                
+                customTab.classList.add(...inactiveClasses);
+                customTab.classList.remove(...activeClasses);
+            } else {
+                customContent.style.display = 'grid';
+                customContent.classList.remove('hidden');
+                modularContent.style.display = 'none';
+                modularContent.classList.add('hidden');
+                
+                customTab.classList.add(...activeClasses);
+                customTab.classList.remove(...inactiveClasses);
+                
+                modularTab.classList.add(...inactiveClasses);
+                modularTab.classList.remove(...activeClasses);
+            }
+        }
+    </script>
+
+</body></html>
