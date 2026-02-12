@@ -1,0 +1,673 @@
+<html lang="en" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLYERA | Website Specifications</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    letterSpacing: {
+                        tighter: '-0.04em',
+                        tight: '-0.02em',
+                        widest: '0.15em',
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { -webkit-font-smoothing: antialiased; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background-color: rgba(163, 163, 163, 0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background-color: rgba(163, 163, 163, 0.4); }
+        .dark ::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.1); }
+        .dark ::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 255, 255, 0.2); }
+        ::selection { background: rgba(59, 130, 246, 0.3); color: white; }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        iconify-icon {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body class="bg-neutral-50 dark:bg-[#050505] text-neutral-900 dark:text-neutral-100 transition-colors duration-700 font-sans selection:bg-brand-500/30 overflow-hidden h-screen w-screen flex">
+
+    <!-- Right Floating Navigation -->
+    <div class="fixed hidden lg:flex flex-col text-neutral-400 dark:text-white mix-blend-difference z-50 bottom-6 right-6 items-end gap-4 pointer-events-none">
+        <button id="themeToggle" class="group flex items-center justify-end pointer-events-auto">
+            <div class="flex items-center gap-0 group-hover:gap-3 rounded-md p-1 group-hover:px-2 group-hover:bg-white/20 group-hover:backdrop-blur-md transition-all duration-500 ease-out border border-transparent group-hover:border-white/20">
+                 <span class="text-xs font-medium max-w-0 group-hover:max-w-[100px] overflow-hidden transition-all duration-500 ease-out opacity-0 group-hover:opacity-100 whitespace-nowrap">Toggle Theme</span>
+                 <div class="w-4 h-4 relative flex items-center justify-center">
+                    <iconify-icon icon="lucide:sun" class="absolute transition-opacity duration-300 opacity-0 dark:opacity-100" width="18" stroke-width="1.5"></iconify-icon>
+                    <iconify-icon icon="lucide:moon" class="absolute transition-opacity duration-300 opacity-100 dark:opacity-0" width="18" stroke-width="1.5"></iconify-icon>
+                 </div>
+            </div>
+        </button>
+    </div>
+
+    <!-- Left Sidebar -->
+    <aside class="group fixed left-0 top-0 h-full w-20 hover:w-64 bg-white dark:bg-black border-r border-neutral-200 dark:border-white/5 z-50 transition-all duration-500 ease-in-out flex flex-col justify-between py-8 overflow-hidden hover:shadow-2xl">
+        
+        <div class="flex flex-col gap-2 w-full">
+            <!-- Logo Area -->
+            <div class="h-12 flex items-center px-6 mb-8 w-64">
+                <div class="border border-neutral-200 dark:border-white/20 p-1 w-8 h-8 flex items-center justify-center transition-colors shrink-0 bg-neutral-50 dark:bg-neutral-900 rounded-sm">
+                    <span class="font-serif font-bold text-xs text-black dark:text-white">KY</span>
+                </div>
+                <span class="ml-4 font-semibold tracking-tight text-lg opacity-0 group-hover:opacity-100 transition-all duration-500 whitespace-nowrap translate-x-4 group-hover:translate-x-0">KLYERA</span>
+            </div>
+
+            <!-- Nav Items -->
+            <nav class="flex flex-col gap-1 px-3">
+                
+                <!-- Design Studio (Active State) -->
+                <a href="#" class="flex items-center h-10 px-3 rounded-md bg-neutral-900 text-white dark:bg-white/10 dark:text-white transition-all overflow-hidden">
+                    <iconify-icon icon="lucide:palette" width="20" class="shrink-0" stroke-width="1.5"></iconify-icon>
+                    <span class="ml-4 text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap translate-x-4 group-hover:translate-x-0">Design Studio</span>
+                </a>
+
+                <!-- Presets -->
+                <a href="#" class="flex items-center h-10 px-3 rounded-md text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-white/5 transition-all overflow-hidden">
+                    <iconify-icon icon="lucide:sliders-horizontal" width="20" class="shrink-0" stroke-width="1.5"></iconify-icon>
+                    <span class="ml-4 text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap translate-x-4 group-hover:translate-x-0">Presets</span>
+                </a>
+
+                <!-- Packages -->
+                <a href="#" class="flex items-center h-10 px-3 rounded-md text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-white/5 transition-all overflow-hidden">
+                    <iconify-icon icon="lucide:package" width="20" class="shrink-0" stroke-width="1.5"></iconify-icon>
+                    <span class="ml-4 text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap translate-x-4 group-hover:translate-x-0">Packages</span>
+                </a>
+
+                <!-- Knowledge Hub -->
+                <a href="#" class="flex items-center h-10 px-3 rounded-md text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-white/5 transition-all overflow-hidden">
+                    <iconify-icon icon="lucide:book-open" width="20" class="shrink-0" stroke-width="1.5"></iconify-icon>
+                    <span class="ml-4 text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap translate-x-4 group-hover:translate-x-0">Knowledge Hub</span>
+                </a>
+
+                <!-- Manage Content Header (Toggle) -->
+                <button onclick="toggleSidebarSites()" class="flex items-center h-10 px-3 rounded-md text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-white/5 transition-all w-full text-left overflow-hidden">
+                    <iconify-icon icon="lucide:layers" width="20" class="shrink-0" stroke-width="1.5"></iconify-icon>
+                    <div class="ml-4 flex-1 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap translate-x-4 group-hover:translate-x-0">
+                        <span class="text-sm font-medium">Manage Content</span>
+                        <iconify-icon id="sites-chevron" icon="lucide:chevron-down" width="16" stroke-width="1.5" class="transition-transform duration-300"></iconify-icon>
+                    </div>
+                </button>
+
+                <!-- Sub Items (Sites/Klyera) - Animated -->
+                <div id="sidebar-sites" class="relative overflow-hidden transition-[max-height] duration-500 ease-in-out max-h-[500px]">
+                     <!-- Vertical Line Indicator -->
+                    <div class="absolute left-6 top-1 bottom-1 w-px bg-neutral-200 dark:bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity delay-100"></div>
+
+                    <div class="flex flex-col gap-1 mt-1 mb-4">
+                        <button onclick="selectSite('lumina')" class="flex items-center h-8 pl-10 pr-3 rounded-md text-neutral-900 dark:text-white hover:bg-neutral-50 dark:hover:bg-white/5 transition-all w-full text-left">
+                            <span class="text-xs font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap translate-x-4 group-hover:translate-x-0">Lumina Coffee</span>
+                        </button>
+                        
+                        <button onclick="selectSite('apex')" class="flex items-center h-8 pl-10 pr-3 rounded-md text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-white/5 transition-all w-full text-left">
+                            <span class="text-xs font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap translate-x-4 group-hover:translate-x-0">Apex Architecture</span>
+                        </button>
+
+                        <button onclick="selectSite('velvet')" class="flex items-center h-8 pl-10 pr-3 rounded-md text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-white/5 transition-all w-full text-left">
+                            <span class="text-xs font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap translate-x-4 group-hover:translate-x-0">Velvet Interiors</span>
+                        </button>
+                    </div>
+                </div>
+
+            </nav>
+        </div>
+
+        <!-- Bottom Actions -->
+        <div class="flex flex-col gap-2 px-3 w-64">
+            <a href="#" class="flex items-center h-10 px-3 rounded-md text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-white/5 transition-all">
+                <iconify-icon icon="lucide:help-circle" width="20" class="shrink-0" stroke-width="1.5"></iconify-icon>
+                <span class="ml-4 text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap translate-x-4 group-hover:translate-x-0">Support</span>
+            </a>
+            
+            <div class="mt-4 border-t border-neutral-200 dark:border-white/5 pt-4 flex items-center justify-between px-1">
+                <div class="flex flex-col opacity-0 group-hover:opacity-100 transition-all duration-500 whitespace-nowrap overflow-hidden px-2">
+                    <span class="dark:text-white text-sm font-bold text-black">Alex Morgan</span>
+                    <span class="text-[10px] uppercase text-neutral-500 tracking-wide mt-0.5">3 Websites Available</span>
+                </div>
+                <!-- Logout Icon -->
+                <button class="opacity-0 group-hover:opacity-100 transition-all duration-500 text-neutral-400 hover:text-red-500 pr-2">
+                    <iconify-icon icon="lucide:log-out" width="16" stroke-width="1.5"></iconify-icon>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Flex Container -->
+    <div class="flex-1 ml-20 flex flex-col min-w-0 bg-neutral-50 dark:bg-[#050505]">
+        
+        <!-- Top Navigation -->
+        <header class="h-20 shrink-0 bg-neutral-50/80 dark:bg-[#050505]/80 backdrop-blur-md border-b border-neutral-200 dark:border-white/5 flex items-center justify-between px-8 md:px-12 z-40">
+            
+            <nav class="flex items-center gap-1 bg-neutral-200/50 dark:bg-white/5 p-1 rounded-lg">
+                <a href="#" class="px-4 py-1.5 rounded-md text-xs font-medium bg-white dark:bg-neutral-800 shadow-sm text-black dark:text-white transition-all">Dashboard</a>
+                <a href="#" class="px-4 py-1.5 rounded-md text-xs font-medium text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-all">Inbox</a>
+                <a href="#" class="px-4 py-1.5 rounded-md text-xs font-medium text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-all">Settings</a>
+            </nav>
+
+            <div class="flex items-center gap-6">
+                <!-- Search -->
+                <div class="relative group hidden md:block">
+                    <input type="text" placeholder="Search projects..." class="search-input pl-10 pr-4 py-2 w-64 bg-transparent border border-neutral-200 dark:border-white/10 rounded-full text-xs focus:outline-none focus:border-brand-500 dark:focus:border-brand-500 transition-all placeholder:text-neutral-400 text-neutral-800 dark:text-neutral-200">
+                    <iconify-icon icon="lucide:search" class="search-icon absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 transition-colors" width="16" stroke-width="1.5"></iconify-icon>
+                </div>
+                
+                <button class="relative text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">
+                    <iconify-icon icon="lucide:bell" width="20" stroke-width="1.5"></iconify-icon>
+                    <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border-2 border-neutral-50 dark:border-[#050505]"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <main class="flex-1 flex overflow-hidden">
+            
+            <!-- Main Content -->
+            <div class="flex-1 overflow-y-auto md:p-12 scroll-smooth pt-8 pr-8 pb-8 pl-8">
+                <div class="max-w-7xl mx-auto space-y-8">
+                    
+                    <div class="flex items-end justify-between mb-6">
+                        <div>
+                            <h1 class="dark:text-white text-3xl font-medium text-black tracking-tight mb-2">Website Specifications</h1>
+                            <p class="dark:text-neutral-400 text-sm font-light text-neutral-500">Monitor your digital presence, manage enquiries and adjust settings.</p>
+                        </div>
+                        
+                        <div class="flex items-center gap-3">
+                            <button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-white/10 rounded-md text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-white/5 transition-all shadow-sm">
+                                <iconify-icon icon="lucide:mail" width="16" stroke-width="1.5"></iconify-icon>
+                                Message Client
+                            </button>
+                            <button class="flex items-center gap-2 px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-md text-sm font-medium hover:opacity-90 transition-all shadow-md">
+                                <iconify-icon icon="lucide:download" width="16" stroke-width="1.5"></iconify-icon>
+                                Download Summary
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tabs & Site Selector Line -->
+                    <div class="flex items-end justify-between border-b border-neutral-200 dark:border-white/10 mb-8 pb-px gap-8">
+                        
+                        <div class="flex items-center gap-6">
+                            <!-- Client Name Heading -->
+                            <div class="flex flex-col pb-2">
+                                <h3 class="text-[10px] uppercase tracking-wider text-neutral-500 font-medium mb-0.5">Client Name</h3>
+                                <p class="text-sm font-semibold text-neutral-900 dark:text-white tracking-tight">Alex Morgan</p>
+                            </div>
+
+                            <!-- Separator Line -->
+                            <div class="w-px h-8 bg-neutral-200 dark:bg-white/10 mb-2 mx-2"></div>
+
+                            <!-- Tabs -->
+                            <div class="flex items-center gap-6 -mb-px">
+                                <button onclick="switchTab('requirements')" id="btn-requirements" class="px-1 pb-3 text-sm font-medium border-b-2 border-black dark:border-white text-black dark:text-white transition-colors">Requirements</button>
+                                <button onclick="switchTab('specifications')" id="btn-specifications" class="px-1 pb-3 text-sm font-medium border-b-2 border-transparent text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-neutral-200 transition-colors">Specifications</button>
+                            </div>
+                        </div>
+
+                         <!-- Site Selector Dropdown -->
+                         <div class="relative z-50 mb-2 shrink-0">
+                            <button onclick="toggleDomainDropdown()" class="flex items-center gap-3 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-white/10 rounded-lg p-1.5 pr-3 hover:border-brand-500 transition-colors w-64 justify-between shadow-sm">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-xs font-bold text-neutral-600 dark:text-neutral-300">
+                                        <iconify-icon icon="lucide:globe" width="16" stroke-width="1.5"></iconify-icon>
+                                    </div>
+                                    <div class="flex flex-col items-start">
+                                        <span class="text-[10px] text-neutral-400 uppercase tracking-wider font-medium">Active Domain</span>
+                                        <span id="current-domain-label" class="text-xs font-semibold text-neutral-900 dark:text-white">luminaroasters.com</span>
+                                    </div>
+                                </div>
+                                <iconify-icon icon="lucide:chevron-down" width="14" stroke-width="1.5" class="text-neutral-400"></iconify-icon>
+                            </button>
+
+                            <!-- Dropdown Menu -->
+                            <div id="domain-dropdown" class="hidden absolute right-0 top-full mt-2 w-64 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-white/10 rounded-lg shadow-xl transition-all duration-200 transform origin-top-right z-[60]">
+                                <div class="p-1">
+                                    <button onclick="selectSite('apex')" class="w-full flex items-center gap-3 p-2 hover:bg-neutral-50 dark:hover:bg-white/5 rounded-md transition-colors text-left group/item">
+                                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                        <div class="flex flex-col">
+                                            <span class="text-xs font-medium text-neutral-900 dark:text-white">apexarchitecture.com</span>
+                                            <span class="text-[10px] text-neutral-500">Apex Architecture</span>
+                                        </div>
+                                    </button>
+                                    <button onclick="selectSite('lumina')" class="w-full flex items-center gap-3 p-2 hover:bg-neutral-50 dark:hover:bg-white/5 rounded-md transition-colors text-left group/item">
+                                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                        <div class="flex flex-col">
+                                            <span class="text-xs font-medium text-neutral-900 dark:text-white">luminaroasters.com</span>
+                                            <span class="text-[10px] text-neutral-500">Lumina Coffee Roasters</span>
+                                        </div>
+                                    </button>
+                                    <button onclick="selectSite('velvet')" class="w-full flex items-center gap-3 p-2 hover:bg-neutral-50 dark:hover:bg-white/5 rounded-md transition-colors text-left group/item">
+                                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                        <div class="flex flex-col">
+                                            <span class="text-xs font-medium text-neutral-900 dark:text-white">velvetinteriors.com</span>
+                                            <span class="text-[10px] text-neutral-500">Velvet Interiors</span>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- TAB 1: Requirements -->
+                    <div id="tab-requirements" class="tab-content block space-y-8 animate-fade-in">
+                        
+                        <!-- Build Section -->
+                        <div class="space-y-3">
+                            <h2 class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Build</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <!-- Option 1: Selected -->
+                                <div class="relative p-5 rounded-xl border border-brand-500 bg-brand-50/50 dark:bg-brand-500/10 shadow-sm cursor-default">
+                                    <div class="absolute top-4 right-4 text-brand-500">
+                                        <iconify-icon icon="lucide:check-circle-2" width="20" stroke-width="1.5"></iconify-icon>
+                                    </div>
+                                    <div class="w-10 h-10 rounded-lg bg-white dark:bg-neutral-800 flex items-center justify-center text-brand-600 dark:text-brand-400 mb-3 border border-brand-200 dark:border-brand-500/20 shadow-sm">
+                                        <iconify-icon icon="lucide:pen-tool" width="20" stroke-width="1.5"></iconify-icon>
+                                    </div>
+                                    <h3 class="text-sm font-semibold text-neutral-900 dark:text-white mb-1">Custom Build</h3>
+                                    <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">Tailored development from scratch.</p>
+                                </div>
+
+                                <!-- Option 2 -->
+                                <div class="p-5 rounded-xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900 shadow-sm opacity-60">
+                                    <div class="w-10 h-10 rounded-lg bg-neutral-100 dark:bg-white/5 flex items-center justify-center text-neutral-500 dark:text-neutral-400 mb-3">
+                                        <iconify-icon icon="lucide:boxes" width="20" stroke-width="1.5"></iconify-icon>
+                                    </div>
+                                    <h3 class="text-sm font-semibold text-neutral-900 dark:text-white mb-1">Modular Build</h3>
+                                    <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">Based on pre-existing component library.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Website Section -->
+                        <div class="space-y-3">
+                            <h2 class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Website</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <!-- Option 1 -->
+                                <div class="p-5 rounded-xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900 shadow-sm opacity-60">
+                                    <div class="w-10 h-10 rounded-lg bg-neutral-100 dark:bg-white/5 flex items-center justify-center text-neutral-500 dark:text-neutral-400 mb-3">
+                                        <iconify-icon icon="lucide:layout" width="20" stroke-width="1.5"></iconify-icon>
+                                    </div>
+                                    <h3 class="text-sm font-semibold text-neutral-900 dark:text-white mb-1">Landing Page</h3>
+                                    <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">Single high-conversion page.</p>
+                                </div>
+
+                                <!-- Option 2: Selected -->
+                                <div class="relative p-5 rounded-xl border border-brand-500 bg-brand-50/50 dark:bg-brand-500/10 shadow-sm cursor-default">
+                                    <div class="absolute top-4 right-4 text-brand-500">
+                                        <iconify-icon icon="lucide:check-circle-2" width="20" stroke-width="1.5"></iconify-icon>
+                                    </div>
+                                    <div class="w-10 h-10 rounded-lg bg-white dark:bg-neutral-800 flex items-center justify-center text-brand-600 dark:text-brand-400 mb-3 border border-brand-200 dark:border-brand-500/20 shadow-sm">
+                                        <iconify-icon icon="lucide:book-open" width="20" stroke-width="1.5"></iconify-icon>
+                                    </div>
+                                    <h3 class="text-sm font-semibold text-neutral-900 dark:text-white mb-1">Brochure</h3>
+                                    <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">Multi-page informational site.</p>
+                                </div>
+
+                                <!-- Option 3 -->
+                                <div class="p-5 rounded-xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900 shadow-sm opacity-60">
+                                    <div class="w-10 h-10 rounded-lg bg-neutral-100 dark:bg-white/5 flex items-center justify-center text-neutral-500 dark:text-neutral-400 mb-3">
+                                        <iconify-icon icon="lucide:shopping-bag" width="20" stroke-width="1.5"></iconify-icon>
+                                    </div>
+                                    <h3 class="text-sm font-semibold text-neutral-900 dark:text-white mb-1">E-Commerce</h3>
+                                    <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">Online store with payment gateway.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Package Section -->
+                        <div class="space-y-3">
+                            <h2 class="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Package</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <!-- Package 1 -->
+                                <div class="p-6 rounded-xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900 shadow-sm flex flex-col justify-between h-32 hover:border-neutral-300 dark:hover:border-white/20 transition-colors">
+                                    <div class="flex justify-between items-start w-full">
+                                        <h3 class="text-base font-semibold text-neutral-900 dark:text-white">5 Page</h3>
+                                        <span class="text-sm font-bold text-neutral-500 dark:text-neutral-400">£499.99</span>
+                                    </div>
+                                    <p class="text-xs text-neutral-500 dark:text-neutral-400">Essential business presence.</p>
+                                </div>
+
+                                <!-- Package 2: Selected (Highlight Updated) -->
+                                <div class="relative p-6 rounded-xl border border-brand-500 bg-brand-50/50 dark:bg-brand-500/10 shadow-sm flex flex-col justify-between h-32 cursor-default">
+                                    <div class="absolute top-4 right-4 text-brand-500">
+                                        <iconify-icon icon="lucide:check-circle-2" width="20" stroke-width="1.5"></iconify-icon>
+                                    </div>
+                                    <div class="flex justify-between items-start w-full">
+                                        <h3 class="text-base font-semibold text-neutral-900 dark:text-white">9 Page</h3>
+                                        <span class="text-sm font-bold text-neutral-900 dark:text-white">£799.99</span>
+                                    </div>
+                                    <p class="text-xs text-neutral-600 dark:text-neutral-300 font-medium">Expanded content strategy.</p>
+                                </div>
+
+                                <!-- Package 3 -->
+                                <div class="p-6 rounded-xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-neutral-900 shadow-sm flex flex-col justify-between h-32 hover:border-neutral-300 dark:hover:border-white/20 transition-colors">
+                                    <div class="flex justify-between items-start w-full">
+                                        <h3 class="text-base font-semibold text-neutral-900 dark:text-white">Unlimited</h3>
+                                        <span class="text-sm font-bold text-neutral-500 dark:text-neutral-400">£999.99</span>
+                                    </div>
+                                    <p class="text-xs text-neutral-500 dark:text-neutral-400">Complete enterprise solution.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- TAB 2: Specifications -->
+                    <div id="tab-specifications" class="tab-content hidden space-y-6 animate-fade-in">
+                        <div class="rounded-xl border border-neutral-200 dark:border-white/5 bg-white dark:bg-neutral-900 shadow-sm overflow-hidden">
+                            <div class="p-6 border-b border-neutral-200 dark:border-white/5">
+                                <h3 class="text-sm font-semibold text-neutral-900 dark:text-white">Company Identity</h3>
+                                <p class="text-xs text-neutral-500 mt-1">Core details and assets for the project.</p>
+                            </div>
+
+                            <div class="p-8 space-y-8">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                                    
+                                    <!-- Company Name -->
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-medium text-neutral-700 dark:text-neutral-300">Company Name</label>
+                                        <input type="text" id="spec-company" readonly="" class="w-full px-3 py-2 bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-md text-sm focus:outline-none focus:border-brand-500 dark:text-white transition-colors cursor-default text-neutral-600 dark:text-neutral-400" value="Lumina Coffee Roasters">
+                                    </div>
+
+                                    <!-- URL -->
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-medium text-neutral-700 dark:text-neutral-300">URL</label>
+                                        <div class="relative flex items-center px-3 py-2 bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-white/10 rounded-md">
+                                            <span id="spec-url" class="text-sm text-neutral-600 dark:text-neutral-400 select-all flex-1 font-mono">https://luminaroasters.com</span>
+                                            <iconify-icon icon="lucide:lock" class="text-neutral-400" width="14" stroke-width="1.5"></iconify-icon>
+                                        </div>
+                                    </div>
+
+                                    <!-- Company Logo -->
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-medium text-neutral-700 dark:text-neutral-300">Company Logo</label>
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-12 h-12 rounded-lg border border-dashed border-neutral-300 dark:border-neutral-700 flex items-center justify-center bg-neutral-50 dark:bg-white/5">
+                                                <iconify-icon icon="lucide:image" class="text-neutral-400" width="20" stroke-width="1.5"></iconify-icon>
+                                            </div>
+                                            <button class="flex items-center gap-2 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">
+                                                <iconify-icon icon="lucide:download" width="14" stroke-width="1.5"></iconify-icon>
+                                                Download Logo
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Brand Colours -->
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-medium text-neutral-700 dark:text-neutral-300">Brand Colours</label>
+                                        <div class="flex items-center gap-3">
+                                            <div class="group relative cursor-pointer">
+                                                <div class="w-16 h-8 rounded-md bg-[#2563eb] border border-neutral-200 dark:border-white/10 shadow-sm"></div>
+                                                <span class="absolute -bottom-6 left-0 text-[10px] font-mono text-neutral-500 opacity-0 group-hover:opacity-100 transition-opacity">#2563EB</span>
+                                            </div>
+                                            <div class="group relative cursor-pointer">
+                                                <div class="w-16 h-8 rounded-md bg-[#1e293b] border border-neutral-200 dark:border-white/10 shadow-sm"></div>
+                                                <span class="absolute -bottom-6 left-0 text-[10px] font-mono text-neutral-500 opacity-0 group-hover:opacity-100 transition-opacity">#1E293B</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Company Details -->
+                                    <div class="space-y-2 md:col-span-2">
+                                        <label class="text-xs font-medium text-neutral-700 dark:text-neutral-300">Company Details</label>
+                                        <textarea id="spec-details" rows="4" readonly="" class="w-full px-3 py-2 bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-md text-sm focus:outline-none focus:border-brand-500 dark:text-white transition-colors resize-none leading-relaxed cursor-default text-neutral-600 dark:text-neutral-400">Artisan coffee roasters based in East London. Specializing in single-origin beans sourced directly from sustainable farms in Ethiopia and Colombia. We serve both retail customers and wholesale cafe partners.</textarea>
+                                    </div>
+
+                                    <!-- Services Section -->
+                                    <div class="md:col-span-2 pt-6 border-t border-neutral-200 dark:border-white/5 mt-2">
+                                        <div class="flex flex-col gap-6">
+                                            
+                                            <!-- Heading & Yes Field -->
+                                            <div class="space-y-2">
+                                                <label class="text-xs font-medium text-neutral-700 dark:text-neutral-300">Services Available</label>
+                                                <div class="relative">
+                                                    <input type="text" value="Yes" readonly="" class="w-full md:w-1/3 px-3 py-2 bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-md text-sm focus:outline-none dark:text-white cursor-default">
+                                                    <div class="absolute right-0 top-0 bottom-0 pr-3 flex items-center pointer-events-none md:right-2/3">
+                                                        <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- 4 Services Fields -->
+                                            <div class="flex flex-col gap-3">
+                                                
+                                                <!-- Service 01 -->
+                                                <div class="p-3 rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-50 dark:bg-white/5 flex flex-col md:flex-row gap-3">
+                                                    <input type="text" readonly="" value="Coffee Wholesale" class="w-full md:w-1/3 px-3 py-2 bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-md text-sm text-neutral-600 dark:text-neutral-400 focus:outline-none cursor-default">
+                                                    <input type="text" readonly="" value="Bulk beans for cafes" class="w-full md:w-2/3 px-3 py-2 bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-md text-sm text-neutral-600 dark:text-neutral-400 focus:outline-none cursor-default">
+                                                </div>
+
+                                                <!-- Service 02 -->
+                                                <div class="p-3 rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-50 dark:bg-white/5 flex flex-col md:flex-row gap-3">
+                                                    <input type="text" readonly="" value="Barista Academy" class="w-full md:w-1/3 px-3 py-2 bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-md text-sm text-neutral-600 dark:text-neutral-400 focus:outline-none cursor-default">
+                                                    <input type="text" readonly="" value="Professional training" class="w-full md:w-2/3 px-3 py-2 bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-md text-sm text-neutral-600 dark:text-neutral-400 focus:outline-none cursor-default">
+                                                </div>
+
+                                                <!-- Service 03 -->
+                                                <div class="p-3 rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-50 dark:bg-white/5 flex flex-col md:flex-row gap-3">
+                                                    <input type="text" readonly="" value="Machine Rental" class="w-full md:w-1/3 px-3 py-2 bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-md text-sm text-neutral-600 dark:text-neutral-400 focus:outline-none cursor-default">
+                                                    <input type="text" readonly="" value="Equipment hire" class="w-full md:w-2/3 px-3 py-2 bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-md text-sm text-neutral-600 dark:text-neutral-400 focus:outline-none cursor-default">
+                                                </div>
+
+                                                <!-- Service 04 -->
+                                                <div class="p-3 rounded-xl border border-neutral-200 dark:border-white/10 bg-neutral-50 dark:bg-white/5 flex flex-col md:flex-row gap-3">
+                                                    <input type="text" readonly="" value="Consultancy" class="w-full md:w-1/3 px-3 py-2 bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-md text-sm text-neutral-600 dark:text-neutral-400 focus:outline-none cursor-default">
+                                                    <input type="text" readonly="" value="Shop setup &amp; workflow" class="w-full md:w-2/3 px-3 py-2 bg-white dark:bg-black border border-neutral-200 dark:border-white/10 rounded-md text-sm text-neutral-600 dark:text-neutral-400 focus:outline-none cursor-default">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Pages List -->
+                                    <div class="space-y-3 md:col-span-2 pt-2">
+                                        <label class="text-xs font-medium text-neutral-700 dark:text-neutral-300">Pages Included</label>
+                                        <div class="flex flex-wrap gap-2">
+                                            <span class="px-3 py-1 rounded-full bg-neutral-100 dark:bg-white/10 border border-neutral-200 dark:border-white/5 text-xs font-medium text-neutral-600 dark:text-neutral-300">Homepage</span>
+                                            <span class="px-3 py-1 rounded-full bg-neutral-100 dark:bg-white/10 border border-neutral-200 dark:border-white/5 text-xs font-medium text-neutral-600 dark:text-neutral-300">About Us</span>
+                                            <span class="px-3 py-1 rounded-full bg-neutral-100 dark:bg-white/10 border border-neutral-200 dark:border-white/5 text-xs font-medium text-neutral-600 dark:text-neutral-300">Services</span>
+                                            <span class="px-3 py-1 rounded-full bg-neutral-100 dark:bg-white/10 border border-neutral-200 dark:border-white/5 text-xs font-medium text-neutral-600 dark:text-neutral-300">News</span>
+                                            <span class="px-3 py-1 rounded-full bg-neutral-100 dark:bg-white/10 border border-neutral-200 dark:border-white/5 text-xs font-medium text-neutral-600 dark:text-neutral-300">Our Team</span>
+                                            <span class="px-3 py-1 rounded-full bg-neutral-100 dark:bg-white/10 border border-neutral-200 dark:border-white/5 text-xs font-medium text-neutral-600 dark:text-neutral-300">Contact Us</span>
+                                            <span class="px-3 py-1 rounded-full bg-neutral-100 dark:bg-white/10 border border-neutral-200 dark:border-white/5 text-xs font-medium text-neutral-600 dark:text-neutral-300">Projects</span>
+                                            <span class="px-3 py-1 rounded-full bg-neutral-100 dark:bg-white/10 border border-neutral-200 dark:border-white/5 text-xs font-medium text-neutral-600 dark:text-neutral-300">Gallery</span>
+                                            <span class="px-3 py-1 rounded-full bg-neutral-100 dark:bg-white/10 border border-neutral-200 dark:border-white/5 text-xs font-medium text-neutral-600 dark:text-neutral-300">Downloads</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar: Updates -->
+            <div class="w-80 border-l border-neutral-200 dark:border-white/5 bg-white/50 dark:bg-black/20 overflow-y-auto hidden xl:block p-6">
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between pb-4 border-b border-neutral-200 dark:border-white/5">
+                        <h2 class="font-medium text-sm tracking-tight text-black dark:text-white">News &amp; Updates</h2>
+                        <button class="text-neutral-400 hover:text-black dark:hover:text-white transition-colors">
+                            <iconify-icon icon="lucide:more-horizontal" width="20" stroke-width="1.5"></iconify-icon>
+                        </button>
+                    </div>
+
+                    <div class="relative pl-2">
+                            <!-- Line -->
+                            <div class="absolute left-[7px] top-2 bottom-2 w-px bg-neutral-200 dark:bg-white/10"></div>
+
+                            <!-- Item 1 -->
+                            <div class="relative pl-6 pb-8 group">
+                                <div class="absolute left-0 top-1.5 w-3.5 h-3.5 rounded-full border-2 border-white dark:border-neutral-900 bg-emerald-500 z-10 shadow-sm"></div>
+                                <div class="flex flex-col gap-1">
+                                    <span class="text-xs font-medium text-black dark:text-white group-hover:text-brand-500 transition-colors">New Modular Presets</span>
+                                    <p class="text-xs text-neutral-500 leading-relaxed">Fresh UI blocks are now available in the builder.</p>
+                                    <span class="text-[10px] text-neutral-400 mt-1 font-mono">2h ago</span>
+                                </div>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div class="relative pl-6 pb-8 group">
+                            <div class="absolute left-0 top-1.5 w-3.5 h-3.5 rounded-full border-2 border-white dark:border-neutral-900 bg-blue-500 z-10 shadow-sm"></div>
+                            <div class="flex flex-col gap-1">
+                                <span class="text-xs font-medium text-black dark:text-white group-hover:text-brand-500 transition-colors">Store Now Open</span>
+                                <p class="text-xs text-neutral-500 leading-relaxed">You can now purchase add-ons directly from the dashboard.</p>
+                                <span class="text-[10px] text-neutral-400 mt-1 font-mono">Yesterday</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // Data for sites
+        const sites = {
+            apex: {
+                name: "Apex Architecture",
+                domain: "apexarchitecture.com",
+                company: "Apex Architecture", 
+                url: "https://apexarchitecture.com",
+                details: "Modern architectural firm specializing in sustainable residential and commercial designs across the UK."
+            },
+            lumina: {
+                name: "Lumina Coffee Roasters",
+                domain: "luminaroasters.com",
+                company: "Lumina Coffee Roasters", 
+                url: "https://luminaroasters.com",
+                details: "Artisan coffee roasters based in East London. Specializing in single-origin beans sourced directly from sustainable farms in Ethiopia and Colombia. We serve both retail customers and wholesale cafe partners."
+            },
+            velvet: {
+                name: "Velvet Interiors",
+                domain: "velvetinteriors.com",
+                company: "Velvet Interiors", 
+                url: "https://velvetinteriors.com",
+                details: "Luxury interior design studio creating bespoke living spaces for high-end residential clients."
+            }
+        };
+
+        let currentSiteKey = 'lumina';
+
+        // Sidebar Toggle
+        function toggleSidebarSites() {
+            const menu = document.getElementById('sidebar-sites');
+            const chevron = document.getElementById('sites-chevron');
+            
+            if (menu.classList.contains('max-h-0')) {
+                menu.classList.remove('max-h-0');
+                menu.classList.add('max-h-[500px]');
+                chevron.style.transform = 'rotate(180deg)';
+            } else {
+                menu.classList.add('max-h-0');
+                menu.classList.remove('max-h-[500px]');
+                chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+        
+        // Initial state for sidebar (open)
+        toggleSidebarSites(); 
+
+        // Domain Dropdown Toggle
+        function toggleDomainDropdown() {
+            const dd = document.getElementById('domain-dropdown');
+            dd.classList.toggle('hidden');
+        }
+
+        // Select Site Logic
+        function selectSite(key) {
+            currentSiteKey = key;
+            const data = sites[key];
+
+            // Close Dropdown
+            document.getElementById('domain-dropdown').classList.add('hidden');
+
+            // Update Header Dropdown Label
+            document.getElementById('current-domain-label').textContent = data.domain;
+
+            // Update Specification Fields
+            document.getElementById('spec-company').value = data.company;
+            document.getElementById('spec-url').textContent = data.url;
+            document.getElementById('spec-details').value = data.details;
+        }
+
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        // Check system preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            html.classList.add('dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+        });
+
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            const tabs = ['requirements', 'specifications'];
+            
+            tabs.forEach(t => {
+                const content = document.getElementById('tab-' + t);
+                const btn = document.getElementById('btn-' + t);
+                
+                if (t === tabId) {
+                    content.classList.remove('hidden');
+                    content.classList.add('block');
+                    
+                    btn.classList.remove('border-transparent', 'text-neutral-500', 'dark:text-neutral-400');
+                    btn.classList.add('border-black', 'dark:border-white', 'text-black', 'dark:text-white');
+                } else {
+                    content.classList.add('hidden');
+                    content.classList.remove('block');
+                    
+                    btn.classList.add('border-transparent', 'text-neutral-500', 'dark:text-neutral-400');
+                    btn.classList.remove('border-black', 'dark:border-white', 'text-black', 'dark:text-white');
+                }
+            });
+        }
+
+        // Initialize
+        selectSite('lumina');
+    </script>
+</body></html>

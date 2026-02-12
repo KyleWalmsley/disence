@@ -1,0 +1,571 @@
+<html lang="en" id="html-root" class="dark"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klyera Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            500: '#3b82f6', 
+                            600: '#2563eb',
+                        },
+                        charcoal: {
+                            950: '#050505', 
+                            900: '#0a0a0a',
+                            850: '#111111', 
+                            800: '#161616', 
+                            700: '#222222', 
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.4s ease-out forwards',
+                        'slide-in-left': 'slideInLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideInLeft: {
+                            '0%': { transform: 'translateX(-20px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@400;600;700&amp;display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .dark ::-webkit-scrollbar-thumb { background: #333; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        
+        .mobile-view .desktop-nav { display: none; }
+        .mobile-view .mobile-nav-toggle { display: block; }
+        .mobile-view .hero-content { flex-direction: column; text-align: center; }
+        .mobile-view .hero-buttons { justify-content: center; }
+        .mobile-view .grid-cols-responsive { grid-template-columns: 1fr; }
+        .mobile-view .padding-responsive { padding: 1.5rem; }
+        
+        .mobile-nav-toggle { display: none; }
+        .grid-cols-responsive { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+
+        .preview-content { color: #1e293b; }
+        
+        body, aside, header, div, input, button {
+            transition-property: color, background-color, border-color, width, height, opacity, transform;
+            transition-duration: 200ms;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-charcoal-950 text-slate-800 dark:text-gray-400 antialiased h-screen w-screen flex overflow-hidden selection:bg-blue-500/30 selection:text-blue-600 relative">
+
+    <!-- Left Sidebar (Collapsible & Animated) -->
+    <!-- Changed to absolute positioning to float over content on expansion -->
+    <aside class="absolute left-0 top-0 h-full w-[72px] hover:w-64 flex flex-col border-r border-gray-200 dark:border-charcoal-700 bg-white dark:bg-charcoal-950 z-50 flex-shrink-0 animate-slide-in-left transition-[width] duration-300 ease-[cubic-bezier(0.25,0.75,0.5,1.25)] group overflow-hidden shadow-2xl">
+        <!-- Logo Header -->
+        <div class="h-16 flex items-center px-5 mb-2 flex-shrink-0">
+            <div class="w-8 h-8 bg-black dark:bg-[#161616] border border-gray-200 dark:border-[#333] rounded flex items-center justify-center text-white font-semibold text-xs tracking-wider flex-shrink-0 shadow-sm z-10">
+                KY
+            </div>
+            <span class="text-lg font-semibold tracking-tight text-slate-900 dark:text-white ml-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap delay-75">KLYERA</span>
+        </div>
+
+        <!-- Scrollable Navigation -->
+        <nav class="flex-1 flex flex-col gap-1 px-3 overflow-y-auto overflow-x-hidden">
+            
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-md bg-gray-100 dark:bg-[#161616] text-slate-900 dark:text-white group/item transition-all flex-shrink-0">
+                <i data-lucide="palette" class="w-5 h-5 flex-shrink-0 text-slate-500 dark:text-gray-400 group-hover/item:text-slate-900 dark:group-hover/item:text-white"></i>
+                <span class="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap delay-75">Design Studio</span>
+            </a>
+
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-md text-slate-600 dark:text-gray-500 hover:bg-gray-50 dark:hover:bg-charcoal-800 hover:text-slate-900 dark:hover:text-white transition-all group/item flex-shrink-0">
+                <i data-lucide="sliders" class="w-5 h-5 flex-shrink-0 group-hover/item:text-slate-900 dark:group-hover/item:text-white"></i>
+                <span class="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap delay-75">Presets</span>
+            </a>
+
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-md text-slate-600 dark:text-gray-500 hover:bg-gray-50 dark:hover:bg-charcoal-800 hover:text-slate-900 dark:hover:text-white transition-all group/item flex-shrink-0">
+                <i data-lucide="package" class="w-5 h-5 flex-shrink-0 group-hover/item:text-slate-900 dark:group-hover/item:text-white"></i>
+                <span class="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap delay-75">Packages</span>
+            </a>
+
+            <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-md text-slate-600 dark:text-gray-500 hover:bg-gray-50 dark:hover:bg-charcoal-800 hover:text-slate-900 dark:hover:text-white transition-all group/item flex-shrink-0">
+                <i data-lucide="book-open" class="w-5 h-5 flex-shrink-0 group-hover/item:text-slate-900 dark:group-hover/item:text-white"></i>
+                <span class="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap delay-75">Knowledge Hub</span>
+            </a>
+
+            <!-- Expandable Section -->
+            <div class="mt-2 pt-2 border-t border-gray-200 dark:border-charcoal-800">
+                <button onclick="toggleSidebarGroup(this)" class="w-full flex items-center justify-between px-3 py-2 text-slate-600 dark:text-gray-500 hover:text-slate-900 dark:hover:text-white group/btn">
+                    <div class="flex items-center gap-3 flex-shrink-0">
+                        <i data-lucide="layers" class="w-5 h-5 flex-shrink-0"></i>
+                        <span class="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap delay-75">Manage Content</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="w-3.5 h-3.5 transition-transform duration-200 transform rotate-180 opacity-0 group-hover:opacity-100 delay-75"></i>
+                </button>
+                
+                <div class="pl-10 pr-2 mt-1 space-y-0.5 hidden group-hover:block transition-all delay-75">
+                    <a href="#" class="block px-2 py-1.5 rounded text-xs font-medium text-white bg-black dark:bg-white dark:text-black">Lumina Coffee</a>
+                    <a href="#" class="block px-2 py-1.5 rounded text-xs font-medium text-slate-500 dark:text-gray-500 hover:text-slate-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-charcoal-800">Apex Architecture</a>
+                    <a href="#" class="block px-2 py-1.5 rounded text-xs font-medium text-slate-500 dark:text-gray-500 hover:text-slate-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-charcoal-800">Velvet Interiors</a>
+                </div>
+            </div>
+
+        </nav>
+
+        <!-- Sidebar Footer -->
+        <div class="mt-auto p-4 border-t border-gray-200 dark:border-charcoal-800 space-y-1">
+             <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md text-slate-600 dark:text-gray-500 hover:text-slate-900 dark:hover:text-white transition-all flex-shrink-0">
+                <i data-lucide="help-circle" class="w-5 h-5 flex-shrink-0"></i>
+                <span class="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap delay-75">Support</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Flex Wrapper (Content + Right Sidebar) -->
+    <!-- Added ml-[72px] to compensate for absolute sidebar -->
+    <div class="flex-1 flex flex-col h-full min-w-0 bg-white dark:bg-charcoal-950 ml-[72px]">
+
+        <!-- Header (Updated to Match Image) -->
+        <header class="h-16 flex items-center justify-between px-6 bg-black border-b border-white/5 sticky top-0 z-20 flex-shrink-0">
+            <!-- Left Nav Links (Segmented Control Style) -->
+            <nav class="flex items-center">
+                <div class="flex items-center p-1 bg-[#161616] border border-[#333] rounded-lg">
+                    <a href="#" class="px-3 py-1.5 text-xs font-medium text-white bg-[#333] rounded-md shadow-sm transition-all">Dashboard</a>
+                    <a href="#" class="px-3 py-1.5 text-xs font-medium text-gray-500 hover:text-gray-300 transition-colors">Inbox</a>
+                    <a href="#" class="px-3 py-1.5 text-xs font-medium text-gray-500 hover:text-gray-300 transition-colors">Settings</a>
+                </div>
+            </nav>
+
+            <!-- Right Actions (Search & Notification) -->
+            <div class="flex items-center gap-5">
+                <div class="relative group">
+                    <div class="relative flex items-center bg-[#111] border border-[#333] rounded-full px-4 py-1.5 w-64 focus-within:border-gray-600 transition-all duration-300">
+                        <i data-lucide="search" class="w-3.5 h-3.5 text-gray-500 mr-2"></i>
+                        <input type="text" placeholder="Search projects..." class="border-none outline-none text-xs text-gray-300 placeholder-gray-600 bg-transparent w-full focus:ring-0">
+                    </div>
+                </div>
+                <button class="text-gray-400 hover:text-white transition-colors relative">
+                    <i data-lucide="bell" class="w-4 h-4"></i>
+                    <span class="absolute top-0.5 right-0.5 w-1.5 h-1.5 bg-red-500 rounded-full border border-black"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Inner Flex: Main Content + Right Sidebar -->
+        <div class="flex-1 flex overflow-hidden">
+            
+            <!-- Dashboard Content -->
+            <main class="flex-1 flex flex-col px-8 py-6 min-h-0 overflow-y-auto custom-scrollbar">
+
+                <!-- Title and Action Section -->
+                <div class="flex items-end justify-between mb-8 flex-shrink-0 animate-fade-in">
+                    <div class="flex flex-col gap-1">
+                        <h1 class="text-3xl font-semibold text-slate-900 dark:text-white tracking-tight">Website Editor</h1>
+                        <p class="text-sm text-slate-500 dark:text-gray-500">Manage client websites and specifications.</p>
+                    </div>
+                    
+                    <!-- View Controls -->
+                    <div class="flex items-center gap-3">
+                         <!-- Device Toggles -->
+                        <div class="flex items-center gap-0.5 bg-gray-100 dark:bg-charcoal-800 p-0.5 rounded-lg border border-gray-200 dark:border-charcoal-700">
+                            <button onclick="setDevice('desktop')" id="btn-desktop" class="px-3 py-1.5 rounded-md text-xs font-medium bg-white dark:bg-charcoal-700 text-slate-900 dark:text-white shadow-sm border border-gray-200 dark:border-charcoal-600 transition-all">Desktop</button>
+                            <button onclick="setDevice('tablet')" id="btn-tablet" class="px-3 py-1.5 rounded-md text-xs font-medium text-slate-500 dark:text-gray-500 hover:text-slate-800 dark:hover:text-gray-300 transition-all">Tablet</button>
+                            <button onclick="setDevice('mobile')" id="btn-mobile" class="px-3 py-1.5 rounded-md text-xs font-medium text-slate-500 dark:text-gray-500 hover:text-slate-800 dark:hover:text-gray-300 transition-all">Mobile</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Website Preview Area -->
+                <div id="website-preview-container" class="flex-1 mx-auto w-full transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] bg-white dark:bg-[#111] border border-gray-200 dark:border-charcoal-700 rounded-xl overflow-hidden relative flex flex-col shadow-2xl shadow-slate-200/50 dark:shadow-none mb-6">
+                    <!-- Browser Bar Mockup -->
+                    <div class="bg-gray-50 dark:bg-charcoal-800 border-b border-gray-200 dark:border-charcoal-700 h-9 px-4 flex items-center justify-between flex-shrink-0">
+                        <div class="flex gap-1.5">
+                            <div class="w-2.5 h-2.5 rounded-full bg-red-400/80 dark:bg-[#333]"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-yellow-400/80 dark:bg-[#333]"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-green-400/80 dark:bg-[#333]"></div>
+                        </div>
+                        <div class="flex-1 flex justify-center">
+                            <div class="px-3 py-0.5 bg-white dark:bg-[#050505] rounded text-[10px] text-slate-400 dark:text-gray-500 font-mono w-48 text-center truncate border border-gray-200 dark:border-charcoal-700 shadow-sm">
+                                lumina-coffee.klyera.site
+                            </div>
+                        </div>
+                        <div class="w-10"></div>
+                    </div>
+
+                    <!-- Content (Lumina Coffee Theme) -->
+                    <div class="h-full w-full overflow-y-auto bg-white text-slate-800 pb-12 overflow-x-hidden preview-content">
+                        <!-- Website Header -->
+                        <nav class="bg-white px-8 py-5 flex flex-wrap justify-between items-center sticky top-0 z-10 border-b border-gray-100">
+                            <div class="font-sans font-bold text-xl text-slate-900 tracking-tight flex items-center gap-2">
+                                <div class="w-6 h-6 bg-slate-900 rounded-full"></div>
+                                Lumina
+                            </div>
+                            
+                            <div class="desktop-nav gap-8 text-sm font-medium text-slate-600 hidden md:flex">
+                                <a href="#" class="text-slate-900">Shop</a>
+                                <a href="#" class="hover:text-slate-900 transition-colors">Subscriptions</a>
+                                <a href="#" class="hover:text-slate-900 transition-colors">Locations</a>
+                                <a href="#" class="hover:text-slate-900 transition-colors">Wholesale</a>
+                            </div>
+                            
+                            <div class="mobile-nav-toggle">
+                                <i data-lucide="menu" class="w-6 h-6 text-slate-900"></i>
+                            </div>
+
+                            <button class="desktop-nav text-slate-900 hover:text-blue-600 transition-colors hidden md:block">
+                                <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                            </button>
+                        </nav>
+
+                        <!-- Website Hero -->
+                        <header class="relative min-h-[450px] flex items-center px-8 py-20 bg-[#F9FAFB]">
+                            <div class="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
+                                <div class="space-y-6">
+                                    <span class="text-blue-600 font-semibold tracking-wider text-xs uppercase mb-2 block">Ethically Sourced</span>
+                                    <h2 class="text-5xl font-bold text-slate-900 mb-4 leading-[1.1] tracking-tight">
+                                        Morning Rituals, <br>Elevated.</h2>
+                                    <p class="text-lg text-slate-600 mb-6 font-normal max-w-md leading-relaxed">
+                                        Single-origin beans roasted to perfection in East London. Experience the true depth of flavor in every cup.
+                                    </p>
+                                    <div class="flex gap-4 hero-buttons">
+                                        <button class="bg-slate-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-slate-800 transition-colors shadow-lg shadow-slate-900/10">Shop Coffee</button>
+                                        <button class="text-slate-900 px-6 py-3 font-medium hover:text-blue-600 transition-colors">Our Story</button>
+                                    </div>
+                                </div>
+                                <div class="relative h-[400px] w-full bg-gray-200 rounded-2xl overflow-hidden shadow-2xl">
+                                     <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&amp;w=2671&amp;auto=format&amp;fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Coffee Pour">
+                                </div>
+                            </div>
+                        </header>
+
+                        <!-- Features Section -->
+                        <section class="padding-responsive py-20 px-8 border-t border-gray-100">
+                             <div class="max-w-6xl mx-auto">
+                                <div class="grid-cols-responsive gap-8">
+                                    <div class="p-6 bg-gray-50 rounded-xl">
+                                        <i data-lucide="truck" class="w-8 h-8 text-slate-900 mb-4"></i>
+                                        <h3 class="font-bold text-slate-900 mb-2">Free Shipping</h3>
+                                        <p class="text-sm text-slate-600">On all orders over £30 within the UK.</p>
+                                    </div>
+                                    <div class="p-6 bg-gray-50 rounded-xl">
+                                        <i data-lucide="refresh-cw" class="w-8 h-8 text-slate-900 mb-4"></i>
+                                        <h3 class="font-bold text-slate-900 mb-2">Flexible Subscriptions</h3>
+                                        <p class="text-sm text-slate-600">Pause, skip or cancel anytime.</p>
+                                    </div>
+                                    <div class="p-6 bg-gray-50 rounded-xl">
+                                        <i data-lucide="award" class="w-8 h-8 text-slate-900 mb-4"></i>
+                                        <h3 class="font-bold text-slate-900 mb-2">Award Winning</h3>
+                                        <p class="text-sm text-slate-600">Voted best roaster 2023.</p>
+                                    </div>
+                                </div>
+                             </div>
+                        </section>
+                    </div>
+                </div>
+
+            </main>
+
+            <!-- Right Sidebar Configuration Panel (Moved Inside Flex) -->
+            <aside class="w-80 border-l border-gray-200 dark:border-charcoal-700 bg-white dark:bg-charcoal-950 hidden xl:flex flex-col flex-shrink-0 z-30 font-sans h-full overflow-hidden">
+
+                <!-- Header -->
+                <div class="px-6 py-5 flex items-center justify-between border-b border-gray-200 dark:border-charcoal-700">
+                    <h2 class="text-sm font-semibold text-slate-900 dark:text-white">Project Config</h2>
+                    <button class="text-slate-400 dark:text-gray-500 hover:text-slate-900 dark:hover:text-white"><i data-lucide="more-horizontal" class="w-4 h-4"></i></button>
+                </div>
+
+                <!-- Controls Container -->
+                <div class="flex-1 overflow-y-auto custom-scrollbar flex flex-col px-6 pb-6">
+
+                    <!-- Page Selector -->
+                    <div class="mt-6 mb-8 relative">
+                        <div class="absolute left-[-23px] top-2 bottom-0 w-[2px] bg-gray-200 dark:bg-[#222]"></div>
+                        
+                        <div class="relative pl-4 mb-6">
+                            <div class="absolute left-[-26px] top-1.5 w-2 h-2 rounded-full bg-blue-600 ring-4 ring-white dark:ring-[#050505] z-10"></div>
+                            <h3 class="text-xs font-semibold text-slate-900 dark:text-white mb-1">Active Page</h3>
+                            <p class="text-[10px] text-slate-500 dark:text-gray-500 mb-3">Currently editing</p>
+
+                            <button onclick="togglePages()" class="flex items-center justify-between w-full p-2.5 bg-gray-50 dark:bg-[#111] border border-gray-200 dark:border-charcoal-700 rounded-lg hover:border-gray-300 dark:hover:border-gray-600 transition-colors group">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs font-medium text-slate-700 dark:text-gray-200" id="current-page-label">Homepage</span>
+                                </div>
+                                <i id="pages-chevron" data-lucide="chevron-down" class="w-3.5 h-3.5 text-gray-400 group-hover:text-slate-900 dark:group-hover:text-white transition-transform duration-200"></i>
+                            </button>
+                    
+                            <div id="pages-list" class="hidden mt-2 bg-white dark:bg-[#111] border border-gray-200 dark:border-charcoal-700 rounded-lg p-1 space-y-0.5 shadow-lg">
+                                <div onclick="selectPage(this, 'Homepage')" class="page-item flex items-center justify-between p-2 rounded hover:bg-gray-100 dark:hover:bg-[#222] cursor-pointer group transition-colors">
+                                    <span class="text-xs text-slate-900 dark:text-white text-active">Homepage</span>
+                                    <i data-lucide="check" class="w-3 h-3 text-blue-600 check-active"></i>
+                                </div>
+                                <div onclick="selectPage(this, 'About Us')" class="page-item flex items-center justify-between p-2 rounded hover:bg-gray-100 dark:hover:bg-[#222] cursor-pointer group transition-colors">
+                                    <span class="text-xs text-slate-500 dark:text-gray-500 group-hover:text-slate-900 dark:group-hover:text-gray-300 text-active">About Us</span>
+                                    <i data-lucide="check" class="w-3 h-3 text-blue-600 check-active hidden"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section Structure -->
+                        <div class="relative pl-4">
+                            <div class="absolute left-[-26px] top-1.5 w-2 h-2 rounded-full bg-blue-100 dark:bg-blue-500/20 border border-blue-500 ring-4 ring-white dark:ring-[#050505] z-10"></div>
+                            <h3 class="text-xs font-semibold text-slate-900 dark:text-white mb-1">Structure</h3>
+                            <p class="text-[10px] text-slate-500 dark:text-gray-500 mb-3">Page sections</p>
+                            
+                            <div class="bg-gray-50 dark:bg-[#111] border border-gray-200 dark:border-charcoal-700 rounded-lg overflow-hidden">
+                                <button onclick="toggleSections()" class="flex items-center justify-between w-full px-4 py-3 bg-gray-100 dark:bg-[#161616] border-b border-gray-200 dark:border-charcoal-700 transition-colors hover:bg-gray-200 dark:hover:bg-[#1a1a1a]">
+                                    <span class="text-[10px] font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider">Sections List</span>
+                                    <i id="sections-chevron" data-lucide="chevron-down" class="w-3.5 h-3.5 text-gray-500 transition-transform duration-200"></i>
+                                </button>
+                
+                                <div id="sections-list" class="hidden p-1 space-y-0.5">
+                                    <div onclick="toggleSectionStatus(this)" class="flex items-center justify-between p-2 rounded hover:bg-gray-200 dark:hover:bg-[#222] cursor-pointer group transition-colors">
+                                        <span class="text-xs text-slate-700 dark:text-gray-300">Hero Header</span>
+                                        <div class="status-dot w-1.5 h-1.5 rounded-full bg-green-500"></div>
+                                    </div>
+                                    <div onclick="toggleSectionStatus(this)" class="flex items-center justify-between p-2 rounded hover:bg-gray-200 dark:hover:bg-[#222] cursor-pointer group transition-colors">
+                                        <span class="text-xs text-slate-700 dark:text-gray-300">Features Grid</span>
+                                        <div class="status-dot w-1.5 h-1.5 rounded-full bg-green-500"></div>
+                                    </div>
+                                    <div class="flex items-center justify-between p-2 rounded opacity-50 cursor-not-allowed">
+                                        <span class="text-xs text-gray-400 dark:text-gray-500">Testimonials (Disabled)</span>
+                                        <div class="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-600"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabs -->
+                    <div class="border-t border-gray-200 dark:border-charcoal-700 pt-6 mt-2">
+                        <div class="flex items-center mb-6 border-b border-gray-200 dark:border-charcoal-700">
+                            <button id="tab-btn-appearance" onclick="switchTab('appearance')" class="mr-6 text-xs font-semibold text-slate-900 dark:text-white border-b-2 border-blue-600 pb-2 -mb-[1px]">Appearance</button>
+                            <button id="tab-btn-content" onclick="switchTab('content')" class="text-xs font-semibold text-slate-500 dark:text-gray-500 hover:text-slate-800 dark:hover:text-white border-b-2 border-transparent pb-2 -mb-[1px] transition-colors">Content</button>
+                        </div>
+
+                        <!-- Tab Content Area -->
+                        <div class="space-y-6 pb-6">
+                            <!-- Appearance Tab Content -->
+                            <div id="tab-appearance" class="space-y-6">
+                                <div>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <label class="text-[10px] font-bold text-slate-500 dark:text-gray-500 uppercase tracking-wider">Heading Style</label>
+                                    </div>
+                                    <div class="relative group">
+                                        <select class="w-full appearance-none bg-white dark:bg-[#111] border border-gray-300 dark:border-charcoal-700 hover:border-gray-400 dark:hover:border-gray-600 rounded-lg text-xs font-medium text-slate-700 dark:text-gray-200 px-3 py-2.5 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all cursor-pointer">
+                                            <option>Display Large</option>
+                                            <option>Display Medium</option>
+                                            <option>Standard</option>
+                                        </select>
+                                        <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                                            <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <label class="text-[10px] font-bold text-slate-500 dark:text-gray-500 uppercase tracking-wider">Theme Colors</label>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <button class="w-8 h-8 rounded-full bg-slate-900 ring-2 ring-offset-2 ring-offset-white dark:ring-offset-[#050505] ring-blue-500 cursor-pointer"></button>
+                                        <button class="w-8 h-8 rounded-full bg-blue-600 cursor-pointer hover:ring-2 ring-offset-2 ring-offset-white dark:ring-offset-[#050505] ring-gray-400"></button>
+                                        <button class="w-8 h-8 rounded-full bg-emerald-600 cursor-pointer hover:ring-2 ring-offset-2 ring-offset-white dark:ring-offset-[#050505] ring-gray-400"></button>
+                                        <button class="w-8 h-8 rounded-full bg-rose-500 cursor-pointer hover:ring-2 ring-offset-2 ring-offset-white dark:ring-offset-[#050505] ring-gray-400"></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Content Tab Content -->
+                            <div id="tab-content" class="space-y-6 hidden">
+                                <div class="space-y-3">
+                                    <label class="text-[10px] font-bold text-slate-500 dark:text-gray-500 uppercase tracking-wider block">Hero Image</label>
+                                    <label class="flex flex-col items-center justify-center w-full h-24 border border-dashed border-gray-300 dark:border-[#333] rounded-lg cursor-pointer bg-gray-50 dark:bg-[#111] hover:bg-gray-100 dark:hover:bg-[#161616] transition-colors group">
+                                        <i data-lucide="image" class="w-5 h-5 text-gray-400 mb-1 group-hover:text-blue-500"></i>
+                                        <span class="text-[10px] text-gray-500 group-hover:text-blue-500">Click to upload</span>
+                                        <input type="file" class="hidden">
+                                    </label>
+                                </div>
+                                <div class="space-y-3">
+                                    <label class="text-[10px] font-bold text-slate-500 dark:text-gray-500 uppercase tracking-wider block">Headline</label>
+                                    <textarea class="w-full bg-white dark:bg-[#111] border border-gray-300 dark:border-charcoal-700 rounded-lg px-3 py-2 text-xs text-slate-700 dark:text-gray-300 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 h-20 resize-none">Morning Rituals, Elevated.</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Actions & Toggle -->
+                <div class="p-6 mt-auto border-t border-gray-200 dark:border-charcoal-700 bg-white dark:bg-charcoal-950 flex items-center justify-between">
+                    <button class="text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 dark:bg-blue-600 dark:hover:bg-blue-500 px-4 py-2.5 rounded-lg shadow-md transition-all">
+                        Save Changes
+                    </button>
+
+                    <!-- Light Mode / Dark Mode Toggle -->
+                    <button onclick="toggleTheme()" class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-charcoal-800 text-slate-400 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white transition-colors border border-transparent hover:border-gray-200 dark:hover:border-charcoal-700">
+                        <i id="theme-icon" data-lucide="sun" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+            </aside>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons({ attrs: { 'stroke-width': '1.5' } });
+
+        function toggleTheme() {
+            const html = document.getElementById('html-root');
+            const icon = document.getElementById('theme-icon');
+            
+            html.classList.toggle('dark');
+            
+            if (html.classList.contains('dark')) {
+                icon.setAttribute('data-lucide', 'sun');
+            } else {
+                icon.setAttribute('data-lucide', 'moon');
+            }
+            lucide.createIcons({ attrs: { 'stroke-width': '1.5' } });
+        }
+
+        function switchTab(tabName) {
+            const appearanceTab = document.getElementById('tab-appearance');
+            const contentTab = document.getElementById('tab-content');
+            const appearanceBtn = document.getElementById('tab-btn-appearance');
+            const contentBtn = document.getElementById('tab-btn-content');
+
+            if (tabName === 'appearance') {
+                appearanceTab.classList.remove('hidden');
+                contentTab.classList.add('hidden');
+                
+                appearanceBtn.classList.add('text-slate-900', 'dark:text-white', 'border-blue-600');
+                appearanceBtn.classList.remove('text-slate-500', 'dark:text-gray-500', 'border-transparent');
+                
+                contentBtn.classList.add('text-slate-500', 'dark:text-gray-500', 'border-transparent');
+                contentBtn.classList.remove('text-slate-900', 'dark:text-white', 'border-blue-600');
+            } else {
+                appearanceTab.classList.add('hidden');
+                contentTab.classList.remove('hidden');
+                
+                contentBtn.classList.add('text-slate-900', 'dark:text-white', 'border-blue-600');
+                contentBtn.classList.remove('text-slate-500', 'dark:text-gray-500', 'border-transparent');
+                
+                appearanceBtn.classList.add('text-slate-500', 'dark:text-gray-500', 'border-transparent');
+                appearanceBtn.classList.remove('text-slate-900', 'dark:text-white', 'border-blue-600');
+            }
+        }
+
+        function toggleSections() {
+            const list = document.getElementById('sections-list');
+            const chevron = document.getElementById('sections-chevron');
+            if (list.classList.contains('hidden')) {
+                list.classList.remove('hidden');
+                chevron.style.transform = 'rotate(180deg)';
+            } else {
+                list.classList.add('hidden');
+                chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function toggleSidebarGroup(btn) {
+            const chevron = btn.querySelector('[data-lucide="chevron-down"]');
+            // Assuming the next sibling is the list
+            const list = btn.nextElementSibling;
+            
+            if (list.classList.contains('hidden')) {
+                list.classList.remove('hidden');
+                chevron.style.transform = 'rotate(180deg)';
+            } else {
+                list.classList.add('hidden');
+                chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function toggleSectionStatus(element) {
+            const dot = element.querySelector('.status-dot');
+            if (dot.classList.contains('bg-green-500')) {
+                dot.classList.remove('bg-green-500');
+                dot.classList.add('bg-gray-400');
+            } else {
+                dot.classList.remove('bg-gray-400');
+                dot.classList.add('bg-green-500');
+            }
+        }
+
+        function togglePages() {
+            const list = document.getElementById('pages-list');
+            const chevron = document.getElementById('pages-chevron');
+            if (list.classList.contains('hidden')) {
+                list.classList.remove('hidden');
+                chevron.style.transform = 'rotate(180deg)';
+            } else {
+                list.classList.add('hidden');
+                chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function selectPage(element, pageName) {
+            document.getElementById('current-page-label').innerText = pageName;
+            togglePages();
+
+            const allItems = document.querySelectorAll('.page-item');
+            allItems.forEach(item => {
+                const text = item.querySelector('.text-active');
+                const check = item.querySelector('.check-active');
+
+                text.classList.remove('text-slate-900', 'dark:text-white');
+                text.classList.add('text-slate-500', 'dark:text-gray-500');
+                check.classList.add('hidden');
+            });
+
+            const activeText = element.querySelector('.text-active');
+            const activeCheck = element.querySelector('.check-active');
+
+            activeText.classList.remove('text-slate-500', 'dark:text-gray-500');
+            activeText.classList.add('text-slate-900', 'dark:text-white');
+            activeCheck.classList.remove('hidden');
+        }
+
+        function setDevice(device) {
+            const container = document.getElementById('website-preview-container');
+            const btns = ['btn-desktop', 'btn-tablet', 'btn-mobile'];
+            
+            btns.forEach(id => {
+                const btn = document.getElementById(id);
+                // Reset to default style
+                btn.className = "px-3 py-1.5 rounded-md text-xs font-medium text-slate-500 dark:text-gray-500 hover:text-slate-800 dark:hover:text-gray-300 transition-all";
+            });
+
+            const selectedBtn = document.getElementById(`btn-${device}`);
+            // Set active style
+            selectedBtn.className = "px-3 py-1.5 rounded-md text-xs font-medium bg-white dark:bg-charcoal-700 text-slate-900 dark:text-white shadow-sm border border-gray-200 dark:border-charcoal-600 transition-all";
+
+            container.classList.remove('mobile-view');
+            container.style.maxWidth = '100%'; 
+            
+            if(device === 'tablet') {
+                container.style.maxWidth = '768px';
+            } else if(device === 'mobile') {
+                container.style.maxWidth = '375px';
+                container.classList.add('mobile-view');
+            }
+        }
+    </script>
+
+</body></html>
